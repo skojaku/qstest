@@ -1,18 +1,17 @@
-
 # qstest
 Python codes for the (q,s)--test 
 
 Please cite  
-  Kojaku, S. and Masuda, N. "A generalised significance test for communities in networks". Preprint arXiv:???? (2017).
+  Kojaku, S. and Masuda, N. "A generalised significance test for individual communities in networks". Preprint arXiv:???? (2017).
 
 
 ## Files
-Directory cpp/ contains C++ codes.  
-  * cpp/km_config.h is the header file.
-  * cpp/km_config.cpp is the implementation file of the header file, km_config.h.
-  * cpp/km_config_cl.cpp is the code for the command line client.
-  * cpp/makefile is the makefile for the C++ codes. 
-  * cpp/example_edge_list.txt is an edge list of a network consisting of two idealised core-periphery pairs.
+Directory qstest/ contains python codes.  
+  * qstest/__init__.py is for initialing this package
+  * /km_config.cpp is the implementation file of the header file, km_config.h.
+  * /km_config_cl.cpp is the code for the command line client.
+  * /makefile is the makefile for the C++ codes. 
+  * /example_edge_list.txt is an edge list of a network consisting of two idealised core-periphery pairs.
 
 
 Directory matlab/ contains the MATLAB wrapper for the C++ codes.  
