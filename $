@@ -9,28 +9,42 @@ Please cite
 Directory qstest/ contains python codes.  
   * qstest/__init__.py is for initialing this package
   * qstest/qstest.py is the main codes of the (q,s)-test 
-  * qstest/quality_functions.py contains the codes of the quality functions of individual communities
-  * qstest/size_functions.py contains the codes of the size of individual communities.
+  * qstest/quality_functions.py is the codes of the quality functions 
+  * /km_config.cpp is the implementation file of the header file, km_config.h.
+  * /km_config_cl.cpp is the code for the command line client.
+  * /makefile is the makefile for the C++ codes. 
+  * /example_edge_list.txt is an edge list of a network consisting of two idealised core-periphery pairs.
 
 
-### INSTALL:
+Directory matlab/ contains the MATLAB wrapper for the C++ codes.  
+  * matlab/km_config.m is the code for the MATLAB client.
+  * matlab/km_config_mex.cpp is the MATLAB wrapper for the C++ codes (km_config.h and km_config.cpp)
+  * matlab/makefile is the makefile for the MATLAB codes. 
+  * matlab/example.m is a usage example.
+   
 
-  To install from source, type
+## C++ 
+
+### COMPILE:
+
+  Go to the cpp/ directory. Then, type
         
-   python setup.py install 
+    make
        
-  To install with pip command, type 
+  or type
         
-   pip install qstest 
+    g++ -O3 -std=c++11 -fopenmp -o km_config km_config.cpp
     	
+  This will produce an executable file "km_config" in the cpp/ directory.
+ 
  
 ### USAGE:
+  ``` bash
+  km_config [input-file] [output-file] [options]
+  ```
 
-  To use as a python library:
-   
-   import qstest
+  km_config seeks multiple core-periphery pairs in the network given by [input-file] and saves the detected core-periphery pairs in [output-file].
   
- 
 **[input-file]**  
  * The file should contain a list of edges (space-separated).  
  * The first and second columns represent the IDs of the two nodes forming an edge.    
