@@ -1,0 +1,4 @@
+include README.rst
+include README.md
+include tox.ini
+include setup.cfg
