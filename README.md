@@ -2,7 +2,7 @@
 Python codes for the (q,s)--test 
 
 Please cite  
-  Kojaku, S. and Masuda, N. "A generalised significance test for individual communities in networks". Preprint arXiv:???? (2017).
+Kojaku, S. and Masuda, N. "A generalised significance test for individual communities in networks". Preprint arXiv:???? (2017).
 
 
 ## Files
@@ -13,116 +13,82 @@ Directory qstest/ contains python codes.
   * qstest/size_functions.py contains the codes of the size of individual communities.
 
 
-### INSTALL:
-
-  To install from source, type
+## Installation
+  To install using pip, type
+    
+    pip install qstest
+    
+  To install from source files, type
         
-   python setup.py install 
-       
-  To install with pip command, type 
-        
-   pip install qstest 
-    	
+    python setup.py install 
+       	
+  Then, you can import the qstest module to your script by:
+    
+    import qstest as qs
+  
+## USAGE:
  
-### USAGE:
+    s, pvals = qs.qstest(network, communities, qfunc, sfunc, cdalgorithm)
+ 
+### Input  
+* **network** - Networkx Graph class instance.
+* **communities** - C-dimensional list. communities[c] is a list containing the ids of the nodes in community c.
+* **qfunc** - Quality function of individual communities.　Following quality functions are available:
+    * qs.qmod - Modularity-based quality function of individual communities, 
+    * qs.qint - Internal average degree, 
+    * qs.qexp - Expansion,　　
+    * qs.qcnd - Conductance.　
 
-  To use as a python library:
+  To use your quality function, see [Quality functions](#Quality_functions).
+
+ * **sfunc**  - Size function of individual communities. Following quality functions are available:
+    * qs.n - Number of nodes in a community, 
+    * qs.vol - Sum of degrees of nodes in a community.
+    
+    To use your quality function, see [Size functions](#Size_functions).
    
-   import qstest
+ * **cdalgorithm** - Algorithm for finding communities. Following algorithms are available
+    * louvain_algorithm - [Louvain algorithm](http://perso.crans.org/aynaud/communities/index.html) 
+    * label_propagation - [Label propagation algorithm](https://networkx.github.io/documentation/stable/reference/algorithms/generated/networkx.algorithms.community.asyn_lpa.asyn_lpa_communities.html#networkx.algorithms.community.asyn_lpa.asyn_lpa_communities)
   
- 
-**[input-file]**  
- * The file should contain a list of edges (space-separated).  
- * The first and second columns represent the IDs of the two nodes forming an edge.    
- * The node's ID is assumed to start from 1.  
+ * **(optional) num_of_rand_net** - Number of randomised networks. (Default: 500)
+ * **(optional) alpha** - Statistical significance level before the Šidák correction. (Default: 0.05)
+ * **(optional) num_of_thread** - Number of threads allowed. (Default: 4)
   
-**[output_file]**  
- * The first column represents the node's ID.
- * The second column represents the index of the core-periphery pair to which each node belongs.
- * The third column indicates whether each node is a core node (= 1) or a peripheral node (= 0).
- * The fourth column indicates whether each node belongs to a significant core-periphery pair (= 1) or not (= 0).
+### Output  
+ * s - C-dimensional list. s[c] = True if community c is significant. Otherwise s[c] = False. 
+ * pvals - C-dimensional list. pvals[c] is the p-value for community c.
+
+## Quality functions
+  The (q,s)--test can accept various quality functions of individual communities.
+  You can use your quality function of individual communities, or use four ''off-the-shelf'' quality functions, 
+  qs.qmod, qs.qint, qs.qext and qs.cnd.
   
+  The quality function, say qfunc, should be implemented as follows.
+    
+    q = qfunc( network, community )
+    
+  ### Input
+ * network - Networkx Graph class instance. 
+ * community - List of nodes belonging to a community
+
+  ### Output  
+  * q - Quality of the community
   
-**[options]**  
-* -r R  
- Run the KM-config algorithm R times. (Default: 10)  
-* -a ALPHA  
-  Set the significance level before the Šidák correction to ALPHA. (Default: 1). If this option is not set, the statistical test is not carried out.
-* -l N  
-Set the number of randomised networks to N. (Default: 500)
-* -d "D"  
-Change the delimiter for [input-file] and [output-file] to D. (Default: space)  
-
-
- ### EXAMPLES:
-    
-  To find core-periphery pairs, type
-    
-    ./km_config example_edge_list.txt result.txt
-    
-  To find significant core-periphery pairs at a significance level of 0.05, type
- 
-    ./km_config example_edge_list.txt result.txt -a 0.05 
-
-
-## MATLAB  
-      
-### COMPILE:
-
-  Go to the matlab/ directory. Then, type
-        
-    make
-    
-  or type
-       
-    mex CXXFLAGS='$CXXFLAGS -fopenmp' LDFLAGS='$LDFLAGS -fopenmp' CXXOPTIMFLAGS='-O3 -DNDEBUG' LDOPTIMFLAGS='-O3' km_config_mex.cpp 
-    
-  This will produce a mex file "km_config_mex.mexa64" in the matlab/ directory. 
-  Copy "matlab/km_config_mex.mexa64" and "matlab/km_config.m" to your working directory.
- 
- 
- ### USAGE:
-
-    [c, x, Q, q, p_vals] = km_config(A, num_of_runs, alpha, num_of_rand_nets);
- 
- 
-  **INPUT:** 
- 
-  * A - N times N adjacency matrix, where N is the number of nodes. A(i, j) = 1 if nodes and j are adjacent. Otherwise A(i, j) = 0. Matrix A should be symmetric, i.e., A(i, j) = A(j, i).
-      
-  * (optional) num_of_runs - Number of runs. (Default: 10) 
-      
-  * (optional) alpha - Statistical significance level before the Šidák correction. (Default: 1) If alpha is not set, the statistical test is not carried out. 
-      
-  * (optional) num_of_rand_nets - Number of randomised networks. (Default: 500) 
-
-
-  **OUTPUT:**
-
-  * c - N-dimensional column vector. c(i) is the index of the core-periphery pair to which node i belongs.
-          If node i belongs to an insignificant core-periphery pair, then c(i) = NaN.
-      
-  * x - N-dimensional column vector. If node i is a core node, x(i) = 1. If node i is a periphery node, x(i) = 0.
-          If node i belongs to an insignificant core-periphery pair, then x(i) = NaN.
-      
-  * Q - The quality value of the detected core-periphery pair.
-      
-  * q - C-dimensional column vector. q(i) is the contribution of the i-th core-periphery pair to Q.
-          C is the number of core-periphery pairs.
-      
-  * p_vals - C-dimensional column vector. p_vals(i) is the statistical significance of the i-th core-periphery pair. 
-
+There is no restriction on the name of the quality function.
+We implement four quality functions, qs.qmod, qs.qint, qs.qext and qs.cnd.
+  We implement four types of quality functions as follows
+  * qs.qmod 
+  * qs.qint
+  * qs.qexp
+  * qs.qcnd
+  The qstest module contains four types of quality functions as follows.
   
-### EXAMPLES:
-    
-To find core-periphery pairs, type 
- 
-    [c, x, Q, q] = km_config(A);
+    calc_qint(network, nodes)
 
-To find significant core-periphery pairs at a significance level of 0.05, type	
-    
-    [c, x, Q, q, p_vals] = km_config(A, 10, 0.05);
+## Size functions
 
+## Community detection algorithms
 
 ### REQUIREMENT: 
       

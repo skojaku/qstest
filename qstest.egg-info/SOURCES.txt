@@ -1,0 +1,14 @@
+MANIFEST.in
+README.md
+README.rst
+setup.cfg
+qstest/__init__.py
+qstest/cmalgorithm_wrapper.py
+qstest/qstest.py
+qstest/quality_functions.py
+qstest/size_functions.py
+qstest.egg-info/PKG-INFO
+qstest.egg-info/SOURCES.txt
+qstest.egg-info/dependency_links.txt
+qstest.egg-info/requires.txt
+qstest.egg-info/top_level.txt
