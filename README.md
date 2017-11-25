@@ -22,23 +22,23 @@ Kojaku, S. and Masuda, N. "A generalised significance test for individual commun
     * qs.qexp - Expansion,　　
     * qs.qcnd - Conductance.　
 
-  To use your quality function of individual communities, see [Quality functions](#quality-functions).
+  You can use your quality function of individual communities. See ["How to provide my quality function to qstest"](#how-to-provide-my-quality-function-to-qstest).
 
  * `sfunc`  - Size function of individual communities. Following quality functions are available:
     * qs.n - Number of nodes in a community, 
     * qs.vol - Sum of degrees of nodes in a community.
     
-    To use your measure of the size of a community, see [Size functions](#size-functions).
+    You can use your measure of the size of a community. See ["How to provide my measure of community size to qstest"](#how-to-provide-my-measure-of-community-size-to-qstest).
    
  * `cdalgorithm` - Algorithm for finding communities. Following algorithms are available:
-    * louvain_algorithm - [Louvain algorithm](http://perso.crans.org/aynaud/communities/index.html) 
-    * label_propagation - [Label propagation algorithm](https://networkx.github.io/documentation/stable/reference/algorithms/generated/networkx.algorithms.community.asyn_lpa.asyn_lpa_communities.html#networkx.algorithms.community.asyn_lpa.asyn_lpa_communities)
+    * qs.louvain_algorithm - [Louvain algorithm](http://perso.crans.org/aynaud/communities/index.html),
+    * qs.label_propagation - [Label propagation algorithm](https://networkx.github.io/documentation/stable/reference/algorithms/generated/networkx.algorithms.community.asyn_lpa.asyn_lpa_communities.html#networkx.algorithms.community.asyn_lpa.asyn_lpa_communities).
 
-    To use other algorithms, see [Community detection algorithms](#community_detection_algorithms) 
+    You can use your algorithm for finding communities. See See ["How to provide my community-detection algorithm to qstest"](#how-to-provide-my-measure-of-community-size-to-qstest).
  
  * `num_of_rand_net` (optional)  - Number of randomised networks. (Default: 500)
  * `alpha` (optional)  - Statistical significance level before the Šidák correction. (Default: 0.05)
- * `num_of_thread` (optional) - Number of threads allowed. (Default: 4)
+ * `num_of_thread` (optional) - Number of threads allowed. (Default: 2)
   
 #### Output -   
  * `s` - C-dimensional list. s[c] = True if community c is significant, and s[c] = False if it is insignificant. 
@@ -55,95 +55,108 @@ communities = qs.louvain_algorithm(network)
 s, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, qs.louvain_algorithm, num_of_thread = 1)
 ```
 
-## Quality functions
-The (q,s)--test can accept your quality function of individual communities. To this end, implement the quality function as follows.
+## How to provide my quality function to **qstest**
+You can use your quality function for the significance test. We assume that a large value of the quality function indicates a good community. To this end, write a function (by any name) for computing the quality of a community as follows.
 
-    q = qfunc( network, community )
+    q = my_qfunc( network, community )
     
 #### Input -
  * `network` - Networkx Graph class instance. 
- * `community` - List of nodes belonging to a community
+ * `community` - List of nodes belonging to a community.
 
 #### Output -
-  * `q` - Quality of the community
-  
-Note that there is no restriction on the name of the quality function.
+  * `q` - Quality of the community.
+
+Then, provide the implemented **my_qfunc** to **qstest**:
+```python
+s, pvals = qs.qstest(network, communities, my_qfunc, sfunc, cdalgorithm)
+```
 
 #### Example
 ```python
-def qmod(network, nodes):
-        deg = network.degree(nodes);
-        q = 0;
-        D = 0;
-        for i in nodes:
-                for j in nodes:
-                        if( network.has_edge(i, j) == False ):
-                                continue
-                        q += 1.0;
-                D += deg[i];
-        M = network.size() / 2;
-        q = (q - D * D / (2.0*M)) / (2*M);
-        return q
+import networkx as nx
+from networkx.algorithms.community import LFR_benchmark_graph
+import qstest as qs
+
+ # Number of intra-community edges
+def my_qfunc(network, nodes):
+        return network.subgraph(nodes).size();
+
+network = LFR_benchmark_graph(300, 3, 3, 0.1, average_degree=10, min_community = 50, seed = 1)
+communities = qs.louvain_algorithm(network)
+s, pvals = qs.qstest(network, communities, my_qfunc1, qs.vol, qs.louvain_algorithm)
 ```
 
-## Size functions
-The (q,s)--test can accept various measure of the size of a community. The size function should be implemented as follows.
+## How to provide my measure of community size to **qstest**
+You can use your measure of community size for the significance test. To this end, write a function (by any name) for computing the size of a community as follows.
 
-    s = sfunc( network, community )
+    sz = my_sfunc( network, community )
     
 #### Input -
  * `network` - Networkx Graph class instance. 
  * `community` - List of nodes belonging to a community
 
 #### Output - 
-  * `s` - Size of the community
-  
-Note that there is no restriction on the name of the size function.
+  * `sz` - Size of the community
+
+Then, provide the implemented **my_sfunc** to **qstest**:
+```python
+s, pvals = qs.qstest(network, communities, qfunc, my_sfunc, cdalgorithm)
+```  
 
 #### Example
 ```python
-def n(G, nodes):
-        return len(nodes)
+import networkx as nx
+from networkx.algorithms.community import LFR_benchmark_graph
+import qstest as qs
+
+def my_sfunc(network, nodes):
+        return qs.vol(network, nodes) / qs.n(network, nodes)
+    
+network = LFR_benchmark_graph(300, 3, 3, 0.1, average_degree=10, min_community = 50, seed = 1)
+communities = qs.louvain_algorithm(network)
+s, pvals = qs.qstest(network, communities, qs.qmod, my_sfunc, qs.louvain_algorithm)
 ```
 
-### Community detection algorithms
-The (q,s)-test is not associated with a specific algorithm for finding communities in networks. In many cases, different community-detection algorithms take different inputs and outputs. To absorb the differences, the community-detection algorithm should be wrapped as follow.
+### How to provide my community-detection algorithm to **qstest**
+You can use the algorithm that you used to find communities in networks. To this end, write the following wrapper function (by any name).
 
-    communities = cmalgorithm( network )
+    communities = my_cdalgorithm( network )
     
 #### Input -
  * `network` - Networkx Graph class instance. 
 
 #### Output - 
  * `community` - List of nodes belonging to a community
-  
-Note that there is no restriction on the name of cmalgorithm. If the community-detection algorithm requires parameters such as the number of communities, then pass the parameters through global variables: define, for example, a global variable C, then access to C from the cmdalgorithm.
 
+Then, provide the implemented **my_cdalgorithm** to **qstest**:
+```python
+s, pvals = qs.qstest(network, communities, qfunc, sfunc, my_cdalgorithm)
+```  
+
+If the community-detection algorithm requires parameters such as the number of communities, then pass the parameters through global variables: define, for example, a global variable C, then access to C from the cdalgorithm.
+  
 #### Example:
-
 ```python
-import community as lva
-from networkx.algorithms import community as lpa
+import networkx as nx
+from networkx.algorithms.community import LFR_benchmark_graph
+import qstest as qs
 
-def louvain_algorithm(network):
-        coms = lva.best_partition(network);
-        communities = [];
-        for i in range(max(coms.values()) + 1):
-                communities.append([])
-        
-        for nid in G.nodes():
-                communities[ coms[nid] ].append( nid );
-        
-        return  communities
+# Pareameters of the community-detection algorithm (async_fluidc) called from my_cdalgorithm
+C = 10 
+maxiter = 100
 
-        
-def label_propagation(network):
-        coms_iter = lpa.asyn_lpa_communities(network)
-        communities = []
-        for nodes in iter(coms_iter):
-                communities.append(list(nodes))
-                        
-        return communities      
+def my_cdalgorithm(network, nodes):
+        coms_iter = community.asyn_fluidc(network, C, maxiter) 
+        communities = [] 
+        for nodes in iter(coms_iter): 
+                communities.append(list(nodes)) 
+                         
+        return communities 
+
+network = LFR_benchmark_graph(300, 3, 3, 0.1, average_degree=10, min_community = 50, seed = 1)
+communities = my_cdalgorithm(network)
+s, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, my_cdalgorithm)
 ```
 
 ## REQUIREMENT: 

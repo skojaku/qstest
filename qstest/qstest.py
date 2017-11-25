@@ -3,7 +3,7 @@ from scipy.stats import norm
 import networkx as nx
 import multiprocessing as mp
 
-def qstest(network, communities, qfunc, sfunc, cmalgorithm, num_of_rand_net = 500, num_of_thread = 4, alpha = 0.05):
+def qstest(network, communities, qfunc, sfunc, cmalgorithm, num_of_rand_net = 500, num_of_thread = 2, alpha = 0.05):
 
 	# compute quality, q, and size, s, for each community 	
 	q = np.array( [ qfunc(network, x) for x in communities], dtype=np.float );	
