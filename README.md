@@ -15,10 +15,10 @@ Please cite:
 ## USAGE
  
  ```python
-    s, pvals = qs.qstest(network, communities, qfunc, sfunc, cdalgorithm)
+    s, pvals = qs.qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net = 500, alpha = 0.05, num_of_thread = 2)
  ```
  
-#### Input -  
+#### Input 
 * `network` - Networkx Graph class instance.
 * `communities` - C-dimensional list. communities[c] is a list containing the ids of the nodes in community c.
 * `qfunc` - Quality function of individual communities. Following quality functions are available:
@@ -39,13 +39,13 @@ Please cite:
     * qs.louvain_algorithm - [Louvain algorithm](http://perso.crans.org/aynaud/communities/index.html),
     * qs.label_propagation - [Label propagation algorithm](https://networkx.github.io/documentation/stable/reference/algorithms/generated/networkx.algorithms.community.asyn_lpa.asyn_lpa_communities.html#networkx.algorithms.community.asyn_lpa.asyn_lpa_communities).
 
-    You can use your algorithm for finding communities. See See ["How to provide my community-detection algorithm to qstest"](#how-to-provide-my-measure-of-community-size-to-qstest).
+    You can use your algorithm for finding communities. See ["How to provide my community-detection algorithm to qstest"](#how-to-provide-my-measure-of-community-size-to-qstest).
  
  * `num_of_rand_net` (optional)  - Number of randomised networks. (Default: 500)
  * `alpha` (optional)  - Statistical significance level before the Šidák correction. (Default: 0.05)
  * `num_of_thread` (optional) - Number of threads allowed. (Default: 2)
   
-#### Output -   
+#### Output
  * `s` - C-dimensional list. s[c] = True if community c is significant, and s[c] = False if it is insignificant. 
  * `pvals` - C-dimensional list. pvals[c] is the p-value for community c. 
 
@@ -60,17 +60,17 @@ s, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, qs.louvain_algorithm
 ```
 
 ## How to provide my quality function to **qstest**
-You can use your quality function for the significance test. We assume that a large value of the quality function indicates a good community. To this end, write a function (by any name) for computing the quality of a community as follows.
+You can use your quality function for the significance test. To this end, write a function, by any name, that computes the quality of a community (a large quality value indicates a good community) as follows.
 
  ```python
     q = my_qfunc( network, community )
 ```
 
-#### Input -
+#### Input
  * `network` - Networkx Graph class instance. 
  * `community` - List of nodes belonging to a community.
 
-#### Output -
+#### Output
   * `q` - Quality of the community.
 
 Then, provide the implemented **my_qfunc** to **qstest**:
@@ -83,7 +83,7 @@ s, pvals = qs.qstest(network, communities, my_qfunc, sfunc, cdalgorithm)
 import networkx as nx
 import qstest as qs
 
- # Number of intra-community edges
+# Number of intra-community edges
 def my_qfunc(network, nodes):
         return network.subgraph(nodes).size();
 
@@ -93,17 +93,17 @@ s, pvals = qs.qstest(network, communities, my_qfunc, qs.vol, qs.louvain_algorith
 ```
 
 ## How to provide my measure of community size to **qstest**
-You can use your measure of community size for the significance test. To this end, write a function (by any name) for computing the size of a community as follows.
+You can use your measure of community size for the significance test. To do this, write a function, by any name, that computes the size of a community as follows.
 
 ```python
     sz = my_sfunc( network, community )
 ```
 
-#### Input -
+#### Input
  * `network` - Networkx Graph class instance. 
  * `community` - List of nodes belonging to a community
 
-#### Output - 
+#### Output
   * `sz` - Size of the community
 
 Then, provide the implemented **my_sfunc** to **qstest**:
@@ -132,10 +132,10 @@ You can use the algorithm that you used to find communities in networks. To this
     communities = my_cdalgorithm( network )
  ```
     
-#### Input -
+#### Input 
  * `network` - Networkx Graph class instance. 
 
-#### Output - 
+#### Output
  * `community` - List of nodes belonging to a community
 
 Then, provide the implemented **my_cdalgorithm** to **qstest**:
@@ -174,6 +174,6 @@ s, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, my_cdalgorithm)
 * Python 2.7 or later
 * Networkx 2.0 or later
 --- 
-Last updated: 17 October 2017
+Last updated: 25 December 2017
 
 
