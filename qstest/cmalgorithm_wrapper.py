@@ -26,11 +26,3 @@ def label_propagation(G):
 		communities.append(list(nodes))
 			
 	return communities	
-
-def fluid_community(G):
-	coms_iter = community.asyn_fluidc(G, 10, 10)
-	communities = []
-	for nodes in iter(coms_iter):
-		communities.append(list(nodes))
-			
-	return communities	

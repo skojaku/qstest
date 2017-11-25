@@ -1,19 +1,22 @@
-import numpy as np
 import networkx as nx
-from networkx.algorithms.community import LFR_benchmark_graph
 import qstest as qs
-import sys
-sys.path.append("../python-louvain-master")
-import community 
- 
-# generate a network with communities using the LFR model
-G = LFR_benchmark_graph(100, 2, 2, 0.1, average_degree=5, min_community=20, seed=10)
+from networkx.algorithms import community as nxcdalgorithm 
 
-#first compute the best partition
-coms = community.best_partition(G);
+# Pareameters of the community-detection algorithm (async_fluidc) called from my_cdalgorithm
+C = 3 
+maxiter = 10
 
-significant, pvals = qs.qstest(G, coms, qs.calc_qmod, qs.calc_vol, community.best_partition, num_of_thread=2, num_of_rand_net = 10);
+def my_cdalgorithm(network):
+        communities = [] 
+	subnets = nx.connected_component_subgraphs(network)
+	
+	for subnet in subnets:
+        	coms_iter = nxcdalgorithm.asyn_fluidc(subnet, min([C, subnet.order()]), maxiter) 
+        	for nodes in iter(coms_iter): 
+         	       communities.append(list(nodes)) 
+                         
+        return communities 
 
-#print significant
-#print pvals
-
+network = nx.karate_club_graph()
+communities = my_cdalgorithm(network)
+s, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, my_cdalgorithm)

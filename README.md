@@ -1,17 +1,22 @@
 # qstest
 Python codes for the (q,s)--test, a generalised significance test for individual communities in networks. 
 
-Please cite  
-Kojaku, S. and Masuda, N. "A generalised significance test for individual communities in networks". Preprint arXiv:???? (2017).
+Please cite:
+
+    Kojaku, S. and Masuda, N. "A generalised significance test for individual communities in networks". Preprint arXiv:???? (2017).
 
 # Installation
   To install, type
-    
+
+```bash 
     pip install qstest
-  
+```
+
 ## USAGE
  
+ ```python
     s, pvals = qs.qstest(network, communities, qfunc, sfunc, cdalgorithm)
+ ```
  
 #### Input -  
 * `network` - Networkx Graph class instance.
@@ -47,19 +52,20 @@ Kojaku, S. and Masuda, N. "A generalised significance test for individual commun
 #### Example
 ```python
 import networkx as nx
-from networkx.algorithms.community import LFR_benchmark_graph
 import qstest as qs
 
-network = LFR_benchmark_graph(300, 3, 3, 0.1, average_degree=10, min_community = 50, seed = 1)
+network = nx.karate_club_graph()
 communities = qs.louvain_algorithm(network)
-s, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, qs.louvain_algorithm, num_of_thread = 1)
+s, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, qs.louvain_algorithm)
 ```
 
 ## How to provide my quality function to **qstest**
 You can use your quality function for the significance test. We assume that a large value of the quality function indicates a good community. To this end, write a function (by any name) for computing the quality of a community as follows.
 
+ ```python
     q = my_qfunc( network, community )
-    
+```
+
 #### Input -
  * `network` - Networkx Graph class instance. 
  * `community` - List of nodes belonging to a community.
@@ -75,23 +81,24 @@ s, pvals = qs.qstest(network, communities, my_qfunc, sfunc, cdalgorithm)
 #### Example
 ```python
 import networkx as nx
-from networkx.algorithms.community import LFR_benchmark_graph
 import qstest as qs
 
  # Number of intra-community edges
 def my_qfunc(network, nodes):
         return network.subgraph(nodes).size();
 
-network = LFR_benchmark_graph(300, 3, 3, 0.1, average_degree=10, min_community = 50, seed = 1)
+network = nx.karate_club_graph()
 communities = qs.louvain_algorithm(network)
-s, pvals = qs.qstest(network, communities, my_qfunc1, qs.vol, qs.louvain_algorithm)
+s, pvals = qs.qstest(network, communities, my_qfunc, qs.vol, qs.louvain_algorithm)
 ```
 
 ## How to provide my measure of community size to **qstest**
 You can use your measure of community size for the significance test. To this end, write a function (by any name) for computing the size of a community as follows.
 
+```python
     sz = my_sfunc( network, community )
-    
+```
+
 #### Input -
  * `network` - Networkx Graph class instance. 
  * `community` - List of nodes belonging to a community
@@ -107,21 +114,23 @@ s, pvals = qs.qstest(network, communities, qfunc, my_sfunc, cdalgorithm)
 #### Example
 ```python
 import networkx as nx
-from networkx.algorithms.community import LFR_benchmark_graph
 import qstest as qs
 
+ # Number of intra-community edges
 def my_sfunc(network, nodes):
-        return qs.vol(network, nodes) / qs.n(network, nodes)
-    
-network = LFR_benchmark_graph(300, 3, 3, 0.1, average_degree=10, min_community = 50, seed = 1)
+        return network.subgraph(nodes).size();
+
+network = nx.karate_club_graph()
 communities = qs.louvain_algorithm(network)
 s, pvals = qs.qstest(network, communities, qs.qmod, my_sfunc, qs.louvain_algorithm)
 ```
 
-### How to provide my community-detection algorithm to **qstest**
+## How to provide my community-detection algorithm to **qstest**
 You can use the algorithm that you used to find communities in networks. To this end, write the following wrapper function (by any name).
-
+ 
+ ```python
     communities = my_cdalgorithm( network )
+ ```
     
 #### Input -
  * `network` - Networkx Graph class instance. 
@@ -139,22 +148,24 @@ If the community-detection algorithm requires parameters such as the number of c
 #### Example:
 ```python
 import networkx as nx
-from networkx.algorithms.community import LFR_benchmark_graph
 import qstest as qs
+from networkx.algorithms import community as nxcdalgorithm
 
 # Pareameters of the community-detection algorithm (async_fluidc) called from my_cdalgorithm
-C = 10 
-maxiter = 100
+C = 3
+maxiter = 10
 
-def my_cdalgorithm(network, nodes):
-        coms_iter = community.asyn_fluidc(network, C, maxiter) 
-        communities = [] 
-        for nodes in iter(coms_iter): 
-                communities.append(list(nodes)) 
-                         
-        return communities 
+# Wrapper function for an algorithm, async_fluidc, implemented in Networkx 2.0
+def my_cdalgorithm(network):
+        communities = []
+        subnets = nx.connected_component_subgraphs(network)
+        for subnet in subnets:
+                coms_iter = nxcdalgorithm.asyn_fluidc(subnet, min([C, subnet.order()]), maxiter)
+                for nodes in iter(coms_iter):
+                       communities.append(list(nodes))
+        return communities
 
-network = LFR_benchmark_graph(300, 3, 3, 0.1, average_degree=10, min_community = 50, seed = 1)
+network = nx.karate_club_graph()
 communities = my_cdalgorithm(network)
 s, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, my_cdalgorithm)
 ```
