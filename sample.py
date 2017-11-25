@@ -1,8 +1,8 @@
-import numpy as np
+#import numpy as np
 import networkx as nx
 from networkx.algorithms.community import LFR_benchmark_graph
 #import community
-from networkx.algorithms import community 
+#from networkx.algorithms import community 
 import qstest as qs
 
 # Output reuslts
