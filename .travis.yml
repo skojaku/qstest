@@ -12,4 +12,4 @@ install:
   - pip install -r .requirements.txt
 # command to run tests
 script:
-  - py.test .test.py
+  - py.test test.py
