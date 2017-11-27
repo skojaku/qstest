@@ -14,13 +14,13 @@ Contents
 
   setup.py - Python code to install this package.
  
-  requirements.txt - Script for pip (a package manager for Python)
+  requirements.txt - Script for pip (a package manager for Python).
 
-  test.py - Test code for Travis CI
+  test.py - Test code for Travis CI (a testing program).
 
-  .gitignore - Configuration file for GitHub
+  .gitignore - Configuration file for GitHub.
   
-  .travis.yml - Configuration file for Travis CI
+  .travis.yml - Configuration file for Travis CI (a testing program)
   
   qstest/ - Python codes of the (q, s)-test:
       
