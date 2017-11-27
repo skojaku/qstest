@@ -53,7 +53,7 @@ Please cite:
  
  * `num_of_rand_net` (optional)  - Number of randomised networks. (Default: 500)
  * `alpha` (optional)  - Statistical significance level before the Šidák correction. (Default: 0.05)
- * `num_of_thread` (optional) - Maximum number of threads running in a CPU. (Default: 4)
+ * `num_of_thread` (optional) - Maximum number of CPU threads. (Default: 4)
   
 #### Output
  * `sg` - C-dimensional list. sg[c] indicates that community c is significant (i.e., sg[c] = True) or insignificant (i.e., sg[c] = False). 

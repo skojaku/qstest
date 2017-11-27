@@ -7,13 +7,11 @@ import multiprocessing as mp
 
 # The (q, s)-test
 #
+# Usage
 #
-# Usage:
+#   sg, pvals = qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net, num_of_thread, alpha)
 #
-#   sg, pval = qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net, num_of_thread, alpha)
-#
-#
-# Input:
+# Input
 #
 #   network - Networkx Graph class instance.
 #
@@ -29,13 +27,13 @@ import multiprocessing as mp
 #
 #   alpha (optional) - Statistical significance level before the Šidák correction. (Default: 0.05).
 #
-#   num_of_thread (optional) - Maximum number of threads running in a CPU. (Default: 4).
+#   num_of_thread (optional) - Maximum number of threads per CPU. (Default: 4).
 #
+# Output
 #
-# Output:
-#
-#   q - Quality of the community.
-#
+#   sg - C-dimensional list. sg[c] indicates that community c is significant (i.e., sg[c] = True) or insignificant (i.e., sg[c] = False). 
+#  
+#   pvals - C-dimensional list. pvals[c] is the p-value for community c. 
 #
 def qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net = 500, num_of_thread = 4, alpha = 0.05):
 
@@ -100,4 +98,3 @@ def draw_qs_samples(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand
 # Private function for qstest		
 def wrapper_draw_qs_samples(args):
     return draw_qs_samples(*args)	
-			

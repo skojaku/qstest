@@ -10,11 +10,11 @@ Contents
   
   README.md - README file for Github.	
 
-  README.txt - this README file.
+  README.txt - This README file.
 
   setup.py - Python code to install this package.
  
-  requirements.txt - Metadata for pip (a package manager for Python)
+  requirements.txt - Script for pip (a package manager for Python)
 
   test.py - Test code for pip
   
@@ -94,7 +94,7 @@ Usage
   
     alpha (optional) - Statistical significance level before the Šidák correction. (Default: 0.05)
   
-    num_of_thread (optional) - Maximum number of threads running in a CPU. (Default: 4)
+    num_of_thread (optional) - Maximum number of CPU threads. (Default: 4)
   
   Output
 
@@ -231,4 +231,4 @@ Requirements
 
   python-louvain 0.9
 ———————————————————————————————————————————————————————————————————————————
-Last updated: 28 November 2017
+Last updated: 27 November 2017

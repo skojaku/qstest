@@ -4,23 +4,19 @@ import numpy as np
 
 # Contribution of a community to the modularity 
 #
-#
-# Usage:
+# Usage
 #
 #   q = qmod(network, community)
 #
-#
-# Input:
+# Input
 #
 #   network - Networkx Graph class instance.
 #
 #   community - List of the IDs of nodes in a community.
 #
-#
-# Output:
+# Output
 #
 #   q - Quality of the community.
-#
 #
 def qmod(network, community):
     deg = network.degree(community)
@@ -40,22 +36,18 @@ def qmod(network, community):
 
 # Internal average degree 
 #
-#
-# Usage:
+# Usage
 #
 #   q = qint(network, community)
 #
-#
-# Input:
+# Input
 #
 #   network - Networkx Graph class instance.
 #
 #   community - List of the IDs of nodes in a community.
 #
-#
-# Output:
+# Output
 #   q - Quality of the community
-#
 #
 def qint(network, community):
     deg = network.degree(community)
@@ -74,22 +66,19 @@ def qint(network, community):
 
 # Expansion 
 #
+# Usage
 #
-# Usage:
 #   q = qexp(network, community)
 #
-#
-# Input:
+# Input
 #
 #   network - Networkx Graph class instance.
 #
 #   community - List of the IDs of nodes in a community.
 #
-#
-# Output:
+# Output
 #
 #   q - Quality of the community.
-#
 #
 def qext(network, community):
     deg = network.degree(community)
@@ -110,23 +99,19 @@ def qext(network, community):
 
 # Conductance 
 #
-#
-# Usage:
+# Usage
 #
 #   q = qcnd(network, community)
 #
-#
-# Input:
+# Input
 #
 #   network - Networkx Graph class instance.
 #
 #   community - List of the IDs of nodes in a community.
 #
-#
-# Output:
+# Output
 #
 #   q - Quality of the community.
-#
 #
 def qcnd(network, community):
     deg = network.degree(community)

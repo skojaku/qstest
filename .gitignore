@@ -2,3 +2,4 @@
 build
 dist
 qstest.egg-info
+__pycache__
