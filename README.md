@@ -15,7 +15,7 @@ Please cite:
 ## USAGE
  
  ```python
-    s, pvals = qs.qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net = 500, alpha = 0.05, num_of_thread = 2)
+    sg, pvals = qs.qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net = 500, alpha = 0.05, num_of_thread = 2)
  ```
  
 #### Input 
@@ -29,7 +29,7 @@ Please cite:
 
   You can use your quality function of individual communities. See ["How to pass my quality function to qstest"](#how-to-pass-my-quality-function-to-qstest).
 
- * `sfunc`  - Name of the function providing the size of individual communities. Following quality functions are available:
+ * `sfunc`  - Name of the function providing the size of individual communities. Following size functions are available:
     * qs.n - Number of nodes in a community, 
     * qs.vol - Sum of degrees of nodes in a community.
     
@@ -46,7 +46,7 @@ Please cite:
  * `num_of_thread` (optional) - Maximum number of threads running in a CPU. (Default: 4)
   
 #### Output
- * `s` - C-dimensional list. s[c] = True if community c is significant, and s[c] = False if it is insignificant. 
+ * `sg` - C-dimensional list. s[c] = True if community c is significant, and s[c] = False if it is insignificant. 
  * `pvals` - C-dimensional list. pvals[c] is the p-value for community c. 
 
 #### Example
@@ -56,7 +56,7 @@ import qstest as qs
 
 network = nx.karate_club_graph()
 communities = qs.louvain_algorithm(network)
-s, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, qs.louvain_algorithm)
+sg, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, qs.louvain_algorithm)
 ```
 
 ## How to pass my quality function to qstest
@@ -75,7 +75,7 @@ You can use your quality function for the significance test. To this end, write 
 
 Then, provide the implemented **my_qfunc** to **qstest**:
 ```python
-s, pvals = qs.qstest(network, communities, my_qfunc, sfunc, cdalgorithm)
+sg, pvals = qs.qstest(network, communities, my_qfunc, sfunc, cdalgorithm)
 ```
 
 #### Example
@@ -89,7 +89,7 @@ def my_qfunc(network, nodes):
 
 network = nx.karate_club_graph()
 communities = qs.louvain_algorithm(network)
-s, pvals = qs.qstest(network, communities, my_qfunc, qs.vol, qs.louvain_algorithm)
+sg, pvals = qs.qstest(network, communities, my_qfunc, qs.vol, qs.louvain_algorithm)
 ```
 
 ## How to pass my size function to qstest 
@@ -108,7 +108,7 @@ You can use your definition of the size of a community for the significance test
 
 Then, provide the implemented **my_sfunc** to **qstest**:
 ```python
-s, pvals = qs.qstest(network, communities, qfunc, my_sfunc, cdalgorithm)
+sg, pvals = qs.qstest(network, communities, qfunc, my_sfunc, cdalgorithm)
 ```  
 
 #### Example
@@ -122,7 +122,7 @@ def my_sfunc(network, nodes):
 
 network = nx.karate_club_graph()
 communities = qs.louvain_algorithm(network)
-s, pvals = qs.qstest(network, communities, qs.qmod, my_sfunc, qs.louvain_algorithm)
+sg, pvals = qs.qstest(network, communities, qs.qmod, my_sfunc, qs.louvain_algorithm)
 ```
 
 ## How to pass my community detection algorithm to qstest
@@ -140,7 +140,7 @@ You can use the algorithm that you used to find communities in networks. To this
 
 Then, provide the implemented **my_cdalgorithm** to **qstest**:
 ```python
-s, pvals = qs.qstest(network, communities, qfunc, sfunc, my_cdalgorithm)
+sg, pvals = qs.qstest(network, communities, qfunc, sfunc, my_cdalgorithm)
 ```  
 
 If the community-detection algorithm requires parameters such as the number of communities, then pass the parameters through global variables: define, for example, a global variable C, then access to C from the cdalgorithm.
@@ -167,7 +167,7 @@ def my_cdalgorithm(network):
 
 network = nx.karate_club_graph()
 communities = my_cdalgorithm(network)
-s, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, my_cdalgorithm)
+sg, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, my_cdalgorithm)
 ```
 
 ## REQUIREMENT: 
