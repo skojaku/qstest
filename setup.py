@@ -21,7 +21,7 @@ def find_version(*file_paths):
 setup(
     name='qstest',
 
-    version='1.0.1',
+    version='1.0.3',
 
     description='Python code for the (q,s)-test',
     long_description=long_description,
@@ -31,7 +31,7 @@ setup(
 
     # Author details
     author='Sadamori Kojaku',
-    author_email='skoujaku@bristol.ac.uk',
+    author_email='sadamori.koujaku@bristol.ac.uk',
 
     # Choose your license
     license='MIT',
@@ -42,18 +42,16 @@ setup(
         'Intended Audience :: Science/Research',
         'Topic :: Software Development',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
 
     # What does your project relate to?
-    keywords='networks community qstest',
+    keywords='network community significance test',
 
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
 
-    install_requires=['networkx', 'scipy', 'python-louvain'],
+    install_requires=['networkx', 'scipy', 'python-louvain', 'numpy', 'decorator'],
 )
