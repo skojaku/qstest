@@ -3,7 +3,7 @@ Python codes for the (q, s)-test, a generalised significance test for individual
 
 Please cite:
 
-    Kojaku, S. and Masuda, N. "A generalised significance test for individual communities in networks". Preprint arXiv:???? (2017)
+  Kojaku, S. and Masuda, N. "A generalised significance test for individual communities in networks". Preprint arXiv:???? (2017)
 
 # Installation
   You can install this python package with pip, a package management system for the software written in Python.
@@ -22,7 +22,7 @@ Please cite:
 ```
   
 
-## USAGE
+## Usage
  
  ```python
     sg, pvals = qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net = 500, alpha = 0.05, num_of_thread = 2)
@@ -39,7 +39,7 @@ Please cite:
 
   You can pass your quality function of individual communities to qstest. See ["How to pass my quality function to qstest"](#how-to-pass-my-quality-function-to-qstest).
 
- * `sfunc`  - Size function that computes the size of individual communities. Following size functions are available:
+ * `sfunc`  - Size function (i.e., size of individual communities). Following size functions are available:
     * n - Number of nodes in a community. 
     * vol - Sum of degrees of nodes in a community.
     
@@ -119,7 +119,7 @@ Write a function that outputs the size of a community as follows:
 Then, provide the implemented **my_sfunc** to **qstest**:
 ```python
 sg, pvals = qstest(network, communities, qfunc, my_sfunc, cdalgorithm)
-```  
+```
 
 #### Example
 ```python
@@ -151,11 +151,11 @@ To pass your community detection algorithm to qstest, write the following wrappe
 Then, provide the implemented **my_cdalgorithm** to **qstest**:
 ```python
 sg, pvals = qstest(network, communities, qfunc, sfunc, my_cdalgorithm)
-```  
+```
 
-If the community-detection algorithm requires parameters such as the number of communities, then pass the parameters through global variables: define, for example, a global variable C, then access to C from the cdalgorithm.
+If the community-detection algorithm requires parameters such as the number of communities, then pass the parameters through global variables, e.g., define a global variable C, then access to C from the cdalgorithm.
   
-#### Example:
+#### Example
 ```python
 import networkx as nx
 import qstest as qs
@@ -171,7 +171,7 @@ def my_cdalgorithm(network):
                        communities.append(list(nodes))
         return communities
 
-# Pareameters of the community-detection algorithm called from my_cdalgorithm
+# Pareameters of the community detection algorithm called from my_cdalgorithm
 C = 3
 maxiter = 10
 
@@ -180,7 +180,7 @@ communities = my_cdalgorithm(network)
 sg, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, my_cdalgorithm)
 ```
 
-## REQUIREMENT
+## Requirements
 * Python 2.7 or later.
 * SciPy 1.0 or later.
 * Networkx 2.0 or later.

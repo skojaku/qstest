@@ -1,1 +1,5 @@
 *.pyc
+build
+dist
+qstest.egg-info
+test.py
