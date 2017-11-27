@@ -12,14 +12,14 @@ import numpy as np
 #
 # Input:
 #
-#   network - Networkx Graph class instance
+#   network - Networkx Graph class instance.
 #
-#   community - List of IDs of nodes in a community
+#   community - List of the IDs of nodes in a community.
 #
 #
 # Output:
 #
-#   q - Quality of the community
+#   q - Quality of the community.
 #
 #
 def qmod(network, community):
@@ -48,9 +48,9 @@ def qmod(network, community):
 #
 # Input:
 #
-#   network - Networkx Graph class instance
+#   network - Networkx Graph class instance.
 #
-#   community - List of IDs of nodes in a community
+#   community - List of the IDs of nodes in a community.
 #
 #
 # Output:
@@ -81,14 +81,14 @@ def qint(network, community):
 #
 # Input:
 #
-#   network - Networkx Graph class instance
+#   network - Networkx Graph class instance.
 #
-#   community - List of IDs of nodes in a community
+#   community - List of the IDs of nodes in a community.
 #
 #
 # Output:
 #
-#   q - Quality of the community
+#   q - Quality of the community.
 #
 #
 def qext(network, community):
@@ -118,14 +118,14 @@ def qext(network, community):
 #
 # Input:
 #
-#   network - Networkx Graph class instance
+#   network - Networkx Graph class instance.
 #
-#   community - List of IDs of nodes in a community
+#   community - List of the IDs of nodes in a community.
 #
 #
 # Output:
 #
-#   q - Quality of the community
+#   q - Quality of the community.
 #
 #
 def qcnd(network, community):

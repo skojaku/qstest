@@ -32,21 +32,21 @@ Please cite:
 * `network` - Networkx Graph class instance.
 * `communities` - C-dimensional list of lists. communities[c] is a list containing the IDs of nodes belonging to community c.
 * `qfunc` - Quality function of individual communities. Following quality functions are available:
-    * qmod - Modularity-based quality function of individual communities, 
-    * qint - Internal average degree, 
-    * qexp - Expansion,　　
+    * qmod - Modularity-based quality function of individual communities. 
+    * qint - Internal average degree. 
+    * qexp - Expansion.　　
     * qcnd - Conductance.　
 
   You can use your quality function of individual communities. See ["How to pass my quality function to qstest"](#how-to-pass-my-quality-function-to-qstest).
 
  * `sfunc`  - Size function that computes the size of individual communities. Following size functions are available:
-    * n - Number of nodes in a community, 
+    * n - Number of nodes in a community. 
     * vol - Sum of degrees of nodes in a community.
     
     You can use your definition of the size of a community. See ["How to pass my size function to qstest"](#how-to-pass-my-size-function-to-qstest).
    
  * `cdalgorithm` - Community detection algorithm. Following algorithms are available:
-    * louvain_algorithm - [Louvain algorithm](http://perso.crans.org/aynaud/communities/index.html),
+    * louvain_algorithm - [Louvain algorithm](http://perso.crans.org/aynaud/communities/index.html).
     * label_propagation - [Label propagation algorithm](https://networkx.github.io/documentation/stable/reference/algorithms/generated/networkx.algorithms.community.asyn_lpa.asyn_lpa_communities.html#networkx.algorithms.community.asyn_lpa.asyn_lpa_communities).
 
     You can use your algorithm for finding communities. See ["How to pass my community detection algorithm to qstest"](#how-to-pass-my-community-detection-algorithm-to-qstest).
@@ -77,7 +77,7 @@ Write a function that outputs the quality of a community (a large quality value 
 ```
 
 #### Input
- * `network` - Networkx Graph class instance, 
+ * `network` - Networkx Graph class instance. 
  * `community` - List of nodes belonging to a community.
 
 #### Output
@@ -110,7 +110,7 @@ Write a function that outputs the size of a community as follows:
 ```
 
 #### Input
- * `network` - Networkx Graph class instance, 
+ * `network` - Networkx Graph class instance. 
  * `community` - List of the IDs of nodes belonging to a community.
 
 #### Output

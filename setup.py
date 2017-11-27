@@ -21,7 +21,7 @@ def find_version(*file_paths):
 setup(
     name='qstest',
 
-    version='1.0.0',
+    version='1.0.1',
 
     description='Python code for the (q,s)-test',
     long_description=long_description,

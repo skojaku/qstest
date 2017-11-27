@@ -14,7 +14,7 @@ from networkx.algorithms import nxcom
 #
 # Input:
 #
-#   network - Networkx Graph class instance
+#   network - Networkx Graph class instance.
 #
 #
 # Output:
@@ -48,7 +48,7 @@ def louvain_algorithm(network):
 #
 # Input:
 #
-#   network - Networkx Graph class instance
+#   network - Networkx Graph class instance.
 #
 #
 # Output:
