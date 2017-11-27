@@ -2,6 +2,7 @@ MANIFEST.in
 README.md
 README.rst
 setup.cfg
+setup.py
 qstest/__init__.py
 qstest/cmalgorithm_wrapper.py
 qstest/qstest.py

@@ -1,16 +1,26 @@
 # qstest
-Python codes for the (q,s)--test, a generalised significance test for individual communities in networks. 
+Python codes for the (q,s)-test, a generalised significance test for individual communities in networks. 
 
 Please cite:
 
     Kojaku, S. and Masuda, N. "A generalised significance test for individual communities in networks". Preprint arXiv:???? (2017).
 
 # Installation
-  To install, type
+  You can install this python package with pip, a package management system for software written in Python.
+  
+  To install qstest, type
 
 ```bash 
     pip install qstest
 ```
+
+  If you failed to install, then type the following command: 
+	
+  
+```bash 
+  sudo python setup.py install
+```
+  
 
 ## USAGE
  
