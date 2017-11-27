@@ -6,40 +6,43 @@ Please cite
 ———————————————————————————————————————————————————————————————————————————
 Contents
   
-  LICENSE describes the licence of this package. 
+  LICENSE - Licence of this package. 
   
-  README.md is the README file for Github.	
+  README.md - README file for Github.	
 
-  README.txt is this README file.
+  README.txt - this README file.
 
-  setup.py is the python script to install this package.
+  setup.py - Python code to install this package.
+ 
+  requirements.txt - Metadata for pip (a package manager for Python)
+
+  test.py - Test code for pip
   
-  Directory qstest/ contains Python codes of the (q, s)-test:
+  qstest/ - Python codes of the (q, s)-test:
       
-    qstest/__init__.py is the header file of this package.
+    qstest/__init__.py - Header file of this package.
   
-    qstest/cmalgorithm_wrapper.py contains the codes of community detection algorithms.
+    qstest/cmalgorithm_wrapper.py - Codes of community-detection algorithms.
 
-    qstest/qstest.py contains the codes of the (q, s)-test. 
+    qstest/qstest.py contains - Codes of the (q, s)-test. 
 
-    qstest/quality_functions.py contains the codes of quality functions of individual communities.
+    qstest/quality_functions.py - Codes of quality functions of individual communities.
   
-    qstest/size_functions.py contains the codes of size functions of individual communities.
+    qstest/size_functions.py - Codes of size functions of individual communities.
   
-  Directory examples/ contains example codes:
+  examples/ - example codes:
     
-    examples/example1.py demonstrates the basic usage of qstest
+    examples/example1.py - Basic usage.
 
-    examples/example1.py demonstrates how to pass the user-defined quality function to qstest
+    examples/example2.py - Usage of qstest with a user-defined quality function.
 
-    examples/example1.py demonstrates how to pass the user-defined size function to qstest
+    examples/example3.py - Usage of qstest with a user-defined size function.
 
-    examples/example1.py demonstrates how to pass the user-defined community detection algorithm to qstest
-
+    examples/example4.py - Usage of qstest with a user-defined community-detection algorithm.
 ———————————————————————————————————————————————————————————————————————————
 Installation
 
-  You can install this package with pip, a package management system for the software written in Python.
+  You can install this package with pip, a package management system for Python.
   
   To install, type
 
@@ -47,7 +50,7 @@ Installation
 
   If you failed to install, then type the following command: 
 	
-    sudo python setup.py install
+    python setup.py install
 ———————————————————————————————————————————————————————————————————————————
 Usage
  
@@ -85,11 +88,11 @@ Usage
   
       label_propagation - Label propagation algorithm (https://networkx.github.io/documentation/stable/reference/algorithms/community.html).
   
-      You can pass your community detection algorithm to qstest. See "How to pass my community detection algorithm to qstest".
+      You can pass your community-detection algorithm to qstest. See "How to pass my community-detection algorithm to qstest".
    
-    num_of_rand_net (optional)  - Number of randomised networks. (Default: 500)
+    num_of_rand_net (optional) - Number of randomised networks. (Default: 500)
   
-    alpha (optional)  - Statistical significance level before the Šidák correction. (Default: 0.05)
+    alpha (optional) - Statistical significance level before the Šidák correction. (Default: 0.05)
   
     num_of_thread (optional) - Maximum number of threads running in a CPU. (Default: 4)
   
@@ -174,9 +177,9 @@ How to pass my size function to qstest
     communities = qs.louvain_algorithm(network)
     sg, pvals = qs.qstest(network, communities, qs.qmod, my_sfunc, qs.louvain_algorithm)
 ———————————————————————————————————————————————————————————————————————————
-How to pass my community detection algorithm to qstest
+How to pass my community-detection algorithm to qstest
 
-  To pass your community detection algorithm to qstest, write the following wrapper function:
+  To pass your community-detection algorithm to qstest, write the following wrapper function:
    
     communities = my_cdalgorithm(network)
 
@@ -210,7 +213,7 @@ How to pass my community detection algorithm to qstest
                            communities.append(list(nodes))
             return communities
     
-    # Pareameters of the community detection algorithm called from my_cdalgorithm
+    # Pareameters of async_fluidc
     C = 3
     maxiter = 10
     
@@ -220,10 +223,12 @@ How to pass my community detection algorithm to qstest
 ———————————————————————————————————————————————————————————————————————————
 Requirements
 
-  Python 2.7 or later.
+  Python 2.7, 3.4 or later.
 
   SciPy 1.0 or later.
 
   Networkx 2.0 or later.
+
+  python-louvain 0.9
 ———————————————————————————————————————————————————————————————————————————
 Last updated: 28 November 2017

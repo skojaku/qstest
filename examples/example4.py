@@ -12,11 +12,10 @@ def my_cdalgorithm(network):
                        communities.append(list(nodes))
         return communities
 
-# Pareameters of the community detection algorithm called from my_cdalgorithm
+# Pareameters of async_fluidc
 C = 3
 maxiter = 10
 
 network = nx.karate_club_graph()
 communities = my_cdalgorithm(network)
-qs.louvain_algorithm(communities);
 sg, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, my_cdalgorithm)

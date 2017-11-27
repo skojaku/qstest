@@ -3,7 +3,7 @@ Python codes for the (q, s)-test, a generalised significance test for individual
 
 Please cite:
 
-  Kojaku, S. and Masuda, N. "A generalised significance test for individual communities in networks". Preprint arXiv:???? (2017)
+    Kojaku, S. and Masuda, N. "A generalised significance test for individual communities in networks". Preprint arXiv:???? (2017)
 
 # Installation
   You can install this python package with pip, a package management system for the software written in Python.
@@ -49,7 +49,7 @@ Please cite:
     * louvain_algorithm - [Louvain algorithm](http://perso.crans.org/aynaud/communities/index.html).
     * label_propagation - [Label propagation algorithm](https://networkx.github.io/documentation/stable/reference/algorithms/generated/networkx.algorithms.community.asyn_lpa.asyn_lpa_communities.html#networkx.algorithms.community.asyn_lpa.asyn_lpa_communities).
 
-    You can pass your community detection algorithm to qstest. See ["How to pass my community detection algorithm to qstest"](#how-to-pass-my-community-detection-algorithm-to-qstest).
+    You can pass your community-detection algorithm to qstest. See ["How to pass my community-detection algorithm to qstest"](#how-to-pass-my-community-detection-algorithm-to-qstest).
  
  * `num_of_rand_net` (optional)  - Number of randomised networks. (Default: 500)
  * `alpha` (optional)  - Statistical significance level before the Šidák correction. (Default: 0.05)
@@ -135,8 +135,8 @@ communities = qs.louvain_algorithm(network)
 sg, pvals = qs.qstest(network, communities, qs.qmod, my_sfunc, qs.louvain_algorithm)
 ```
 
-## How to pass my community detection algorithm to qstest
-To pass your community detection algorithm to qstest, write the following wrapper function:
+## How to pass my community-detection algorithm to qstest
+To pass your community-detection algorithm to qstest, write the following wrapper function:
  
  ```python
     communities = my_cdalgorithm(network)
@@ -171,7 +171,7 @@ def my_cdalgorithm(network):
                        communities.append(list(nodes))
         return communities
 
-# Pareameters of the community detection algorithm called from my_cdalgorithm
+# Pareameters of async_fluidc
 C = 3
 maxiter = 10
 
@@ -181,8 +181,9 @@ sg, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, my_cdalgorithm)
 ```
 
 ## Requirements
-* Python 2.7 or later.
-* SciPy 1.0 or later.
-* Networkx 2.0 or later.
+ * Python 2.7, 3.4 or later.
+ * SciPy 1.0 or later.
+ * Networkx 2.0 or later.
+ * python-louvain 0.9
 --- 
 Last updated: 28 November 2017
