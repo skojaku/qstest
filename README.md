@@ -27,19 +27,19 @@ Please cite:
     * qs.qexp - Expansion,　　
     * qs.qcnd - Conductance.　
 
-  You can use your quality function of individual communities. See ["How to use my quality function"](#how-to-use-my-quality-function).
+  You can use your quality function of individual communities. See ["How to pass my quality function to qstest"](#how-to-pass-my-quality-function-to-qstest).
 
  * `sfunc`  - Name of the function providing the size of individual communities. Following quality functions are available:
     * qs.n - Number of nodes in a community, 
     * qs.vol - Sum of degrees of nodes in a community.
     
-    You can use your definition of the size of a community. See ["How to use my definition of the size of a community"](#how-to-use-my-definition-of-the-size-of-a-community).
+    You can use your definition of the size of a community. See ["How to pass my size function to qstest"](#how-to-pass-my-size-function-to-qstest).
    
  * `cdalgorithm` - Name of the function providing communities in the network. Following algorithms are available:
     * qs.louvain_algorithm - [Louvain algorithm](http://perso.crans.org/aynaud/communities/index.html),
     * qs.label_propagation - [Label propagation algorithm](https://networkx.github.io/documentation/stable/reference/algorithms/generated/networkx.algorithms.community.asyn_lpa.asyn_lpa_communities.html#networkx.algorithms.community.asyn_lpa.asyn_lpa_communities).
 
-    You can use your algorithm for finding communities. See ["How to use my community detection algorithm"](#how-to-use-my-community-detection-algorithm).
+    You can use your algorithm for finding communities. See ["How to pass my community detection algorithm to qstest"](#how-to-pass-my-community-detection-algorithm-to-qstest).
  
  * `num_of_rand_net` (optional)  - Number of randomised networks. (Default: 500)
  * `alpha` (optional)  - Statistical significance level before the Šidák correction. (Default: 0.05)
@@ -59,7 +59,7 @@ communities = qs.louvain_algorithm(network)
 s, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, qs.louvain_algorithm)
 ```
 
-## How to use my quality function
+## How to pass my quality function to qstest
 You can use your quality function for the significance test. To this end, write a function that computes the quality of a community (a large quality value indicates a good community) as follows.
 
  ```python
@@ -92,7 +92,7 @@ communities = qs.louvain_algorithm(network)
 s, pvals = qs.qstest(network, communities, my_qfunc, qs.vol, qs.louvain_algorithm)
 ```
 
-## How to use my definition of the size of a community
+## How to pass my size function to qstest 
 You can use your definition of the size of a community for the significance test. To do this, write a function that computes the size of a community as follows.
 
 ```python
@@ -125,7 +125,7 @@ communities = qs.louvain_algorithm(network)
 s, pvals = qs.qstest(network, communities, qs.qmod, my_sfunc, qs.louvain_algorithm)
 ```
 
-## How to use my community detection algorithm
+## How to pass my community detection algorithm to qstest
 You can use the algorithm that you used to find communities in networks. To this end, write the following wrapper function.
  
  ```python
