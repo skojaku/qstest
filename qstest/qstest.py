@@ -49,7 +49,7 @@ def qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net = 50
 	if num_of_thread ==1: # single thread
 		q_tilde, s_tilde = draw_qs_samples(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net)
 	else: # multithreads
-		private_args = [(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net/10) for i in range(num_of_thread)]
+		private_args = [(network, communities, qfunc, sfunc, cdalgorithm, int(num_of_rand_net/num_of_thread)+1) for i in range(num_of_thread)]
 		pool = mp.Pool(num_of_thread)
 		qs_tilde = pool.map(wrapper_draw_qs_samples, private_args)
 		for i in range(num_of_thread):
