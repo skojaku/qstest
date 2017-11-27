@@ -46,7 +46,7 @@ Please cite:
  * `num_of_thread` (optional) - Maximum number of threads running in a CPU. (Default: 4)
   
 #### Output
- * `sg` - C-dimensional list. s[c] = True if community c is significant, and s[c] = False if it is insignificant. 
+ * `sg` - C-dimensional list. sg[c] = True if community c is significant, and sg[c] = False if it is insignificant. 
  * `pvals` - C-dimensional list. pvals[c] is the p-value for community c. 
 
 #### Example
