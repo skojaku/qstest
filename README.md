@@ -126,9 +126,8 @@ sg, pvals = qs.qstest(network, communities, qfunc, my_sfunc, cdalgorithm)
 import networkx as nx
 import qstest as qs
 
-# Number of intra-community edges
 def my_sfunc(network, nodes):
-        return network.subgraph(nodes).size()
+        return len(nodes) * len(nodes)
 
 network = nx.karate_club_graph()
 communities = qs.louvain_algorithm(network)
