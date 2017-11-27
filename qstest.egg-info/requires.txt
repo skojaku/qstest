@@ -1,4 +1,0 @@
-networkx
-scipy
-python-louvain
-multiprocessing

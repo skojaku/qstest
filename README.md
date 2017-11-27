@@ -37,26 +37,26 @@ Please cite:
     * qexp - Expansion.　　
     * qcnd - Conductance.　
 
-  You can use your quality function of individual communities. See ["How to pass my quality function to qstest"](#how-to-pass-my-quality-function-to-qstest).
+  You can pass your quality function of individual communities to qstest. See ["How to pass my quality function to qstest"](#how-to-pass-my-quality-function-to-qstest).
 
  * `sfunc`  - Size function that computes the size of individual communities. Following size functions are available:
     * n - Number of nodes in a community. 
     * vol - Sum of degrees of nodes in a community.
     
-    You can use your definition of the size of a community. See ["How to pass my size function to qstest"](#how-to-pass-my-size-function-to-qstest).
+    You can pass your size function to qstest. See ["How to pass my size function to qstest"](#how-to-pass-my-size-function-to-qstest).
    
- * `cdalgorithm` - Community detection algorithm. Following algorithms are available:
+ * `cdalgorithm` - Community detection algorithm. Following algorithms (implemented in Networkx) are available:
     * louvain_algorithm - [Louvain algorithm](http://perso.crans.org/aynaud/communities/index.html).
     * label_propagation - [Label propagation algorithm](https://networkx.github.io/documentation/stable/reference/algorithms/generated/networkx.algorithms.community.asyn_lpa.asyn_lpa_communities.html#networkx.algorithms.community.asyn_lpa.asyn_lpa_communities).
 
-    You can use your algorithm for finding communities. See ["How to pass my community detection algorithm to qstest"](#how-to-pass-my-community-detection-algorithm-to-qstest).
+    You can pass your community detection algorithm to qstest. See ["How to pass my community detection algorithm to qstest"](#how-to-pass-my-community-detection-algorithm-to-qstest).
  
  * `num_of_rand_net` (optional)  - Number of randomised networks. (Default: 500)
  * `alpha` (optional)  - Statistical significance level before the Šidák correction. (Default: 0.05)
  * `num_of_thread` (optional) - Maximum number of threads running in a CPU. (Default: 4)
   
 #### Output
- * `sg` - C-dimensional list. sg[c] = True if community c is significant, and sg[c] = False if it is insignificant. 
+ * `sg` - C-dimensional list. sg[c] indicates that community c is significant (i.e., sg[c] = True) or insignificant (i.e., sg[c] = False). 
  * `pvals` - C-dimensional list. pvals[c] is the p-value for community c. 
 
 #### Example
@@ -85,7 +85,7 @@ Write a function that outputs the quality of a community (a large quality value 
 
 Then, pass the implemented **my_qfunc** to **qstest**:
 ```python
-sg, pvals = qs.qstest(network, communities, my_qfunc, sfunc, cdalgorithm)
+sg, pvals = qstest(network, communities, my_qfunc, sfunc, cdalgorithm)
 ```
 
 #### Example
@@ -118,7 +118,7 @@ Write a function that outputs the size of a community as follows:
 
 Then, provide the implemented **my_sfunc** to **qstest**:
 ```python
-sg, pvals = qs.qstest(network, communities, qfunc, my_sfunc, cdalgorithm)
+sg, pvals = qstest(network, communities, qfunc, my_sfunc, cdalgorithm)
 ```  
 
 #### Example
@@ -126,6 +126,7 @@ sg, pvals = qs.qstest(network, communities, qfunc, my_sfunc, cdalgorithm)
 import networkx as nx
 import qstest as qs
 
+# Square of the number of nodes in a community
 def my_sfunc(network, nodes):
         return len(nodes) * len(nodes)
 
@@ -135,7 +136,7 @@ sg, pvals = qs.qstest(network, communities, qs.qmod, my_sfunc, qs.louvain_algori
 ```
 
 ## How to pass my community detection algorithm to qstest
-To pass the community detection algorithm to qstest, write the following wrapper function:
+To pass your community detection algorithm to qstest, write the following wrapper function:
  
  ```python
     communities = my_cdalgorithm(network)
@@ -145,11 +146,11 @@ To pass the community detection algorithm to qstest, write the following wrapper
  * `network` - Networkx Graph class instance. 
 
 #### Output
- * `community` - List of nodes belonging to a community.
+ * `communities` - C-dimensional list of lists. communities[c] is a list containing the IDs of nodes belonging to community c.
 
 Then, provide the implemented **my_cdalgorithm** to **qstest**:
 ```python
-sg, pvals = qs.qstest(network, communities, qfunc, sfunc, my_cdalgorithm)
+sg, pvals = qstest(network, communities, qfunc, sfunc, my_cdalgorithm)
 ```  
 
 If the community-detection algorithm requires parameters such as the number of communities, then pass the parameters through global variables: define, for example, a global variable C, then access to C from the cdalgorithm.
@@ -160,7 +161,7 @@ import networkx as nx
 import qstest as qs
 from networkx.algorithms import community as nxcdalgorithm
 
-# Wrapper function for an algorithm, async_fluidc, implemented in Networkx 2.0
+# Wrapper function of async_fluidc implemented in Networkx 2.0
 def my_cdalgorithm(network):
         communities = []
         subnets = nx.connected_component_subgraphs(network)
@@ -180,9 +181,8 @@ sg, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, my_cdalgorithm)
 ```
 
 ## REQUIREMENT
-* Python 2.7 or later
-* Networkx 2.0 or later
+* Python 2.7 or later.
+* SciPy 1.0 or later.
+* Networkx 2.0 or later.
 --- 
 Last updated: 28 November 2017
-
-
