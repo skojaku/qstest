@@ -55,5 +55,5 @@ setup(
 
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
 
-    install_requires=['networkx', 'scipy', 'python-louvain', 'multiprocessing'],
+    install_requires=['networkx', 'scipy', 'python-louvain'],
 )

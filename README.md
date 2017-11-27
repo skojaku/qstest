@@ -8,7 +8,7 @@ Please cite:
 # Installation
   You can install this python package with pip, a package management system for the software written in Python.
   
-  To install qstest, type
+  To install, type
 
 ```bash 
     pip install qstest
@@ -59,7 +59,7 @@ Please cite:
  * `sg` - C-dimensional list. sg[c] indicates that community c is significant (i.e., sg[c] = True) or insignificant (i.e., sg[c] = False). 
  * `pvals` - C-dimensional list. pvals[c] is the p-value for community c. 
 
-#### Example
+#### Example (examples/example1.py)
 ```python
 import networkx as nx
 import qstest as qs
@@ -88,7 +88,7 @@ Then, pass the implemented **my_qfunc** to **qstest**:
 sg, pvals = qstest(network, communities, my_qfunc, sfunc, cdalgorithm)
 ```
 
-#### Example
+#### Example (examples/example2.py)
 ```python
 import networkx as nx
 import qstest as qs
@@ -121,7 +121,7 @@ Then, provide the implemented **my_sfunc** to **qstest**:
 sg, pvals = qstest(network, communities, qfunc, my_sfunc, cdalgorithm)
 ```
 
-#### Example
+#### Example (examples/example3.py)
 ```python
 import networkx as nx
 import qstest as qs
@@ -155,7 +155,7 @@ sg, pvals = qstest(network, communities, qfunc, sfunc, my_cdalgorithm)
 
 If the community-detection algorithm requires parameters such as the number of communities, then pass the parameters through global variables, e.g., define a global variable C, then access to C from the cdalgorithm.
   
-#### Example
+#### Example (examples/example4.py)
 ```python
 import networkx as nx
 import qstest as qs

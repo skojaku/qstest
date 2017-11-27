@@ -2,7 +2,7 @@
 import numpy as np
 
 
-# Modularity-based quality function of individual communities
+# Contribution of a community to the modularity 
 #
 #
 # Usage:

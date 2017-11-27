@@ -4,40 +4,44 @@ Please cite
 
   Kojaku, S. and Masuda, N. "A generalised significance test for individual communities in networks". Preprint arXiv:???? (2017)
 ———————————————————————————————————————————————————————————————————————————
-Directory ./ contains the codes for installing this package and README files.
+Contents
   
-  ./LICENSE describes the licence of this package 
+  LICENSE describes the licence of this package. 
   
-  ./MANIFEST.in is for pip (pip is a package management system for Python) 
+  README.md is the README file for Github.	
+
+  README.txt is this README file.
+
+  setup.py is the python script to install this package.
   
-  ./README.md is the README file for the Github	
-
-  ./README.rst is for pip
-
-  ./README.txt is this README file
-
-  ./setup.cfg is for pip
-  
-  ./setup.py is the python script to install this package
-
-
-Directory qstest/ contains Python codes.
+  Directory qstest/ contains Python codes of the (q, s)-test:
       
-  qstest/__init__.py is the header file of this package.
+    qstest/__init__.py is the header file of this package.
   
-  qstest/cmalgorithm_wrapper.py contains the codes of community detection algorithms
+    qstest/cmalgorithm_wrapper.py contains the codes of community detection algorithms.
 
-  qstest/qstest.py contains the codes of the (q, s)-test 
+    qstest/qstest.py contains the codes of the (q, s)-test. 
 
-  qstest/quality_functions.py contains the codes of quality functions
+    qstest/quality_functions.py contains the codes of quality functions of individual communities.
   
-  qstest/size_functions.py contains the codes of size functions
+    qstest/size_functions.py contains the codes of size functions of individual communities.
+  
+  Directory examples/ contains example codes:
+    
+    examples/example1.py demonstrates the basic usage of qstest
+
+    examples/example1.py demonstrates how to pass the user-defined quality function to qstest
+
+    examples/example1.py demonstrates how to pass the user-defined size function to qstest
+
+    examples/example1.py demonstrates how to pass the user-defined community detection algorithm to qstest
+
 ———————————————————————————————————————————————————————————————————————————
 Installation
 
   You can install this package with pip, a package management system for the software written in Python.
   
-  To install qstest, type
+  To install, type
 
     pip install qstest
 
@@ -47,7 +51,7 @@ Installation
 ———————————————————————————————————————————————————————————————————————————
 Usage
  
-  sg, pvals = qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net = 500, alpha = 0.05, num_of_thread = 2)
+  sg, pvals = qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net = 500, alpha = 0.05, num_of_thread = 4)
  
   Input 
 
@@ -75,7 +79,7 @@ Usage
       
       You can pass your size function to qstest. See "How to pass my size function to qstest".
      
-    cdalgorithm` - Community detection algorithm. Following algorithms (implemented in Networkx) are available:
+    cdalgorithm - Community detection algorithm. Following algorithms (implemented in Networkx) are available:
   
       louvain_algorithm - Louvain algorithm (http://perso.crans.org/aynaud/communities/index.html).
   
@@ -95,7 +99,7 @@ Usage
   
     pvals - C-dimensional list. pvals[c] is the p-value for community c. 
   
-  Example
+  Example (examples/example1.py)
   
     import networkx as nx
     import qstest as qs
@@ -124,7 +128,7 @@ How to pass my quality function to qstest
 
     sg, pvals = qstest(network, communities, my_qfunc, sfunc, cdalgorithm)
 
-  Example
+  Example (examples/example2.py)
 
     import networkx as nx
     import qstest as qs
@@ -138,12 +142,13 @@ How to pass my quality function to qstest
     sg, pvals = qs.qstest(network, communities, my_qfunc, qs.vol, qs.louvain_algorithm)
 ———————————————————————————————————————————————————————————————————————————
 How to pass my size function to qstest
- 
+    
   Write a size function of a community as follows:
   
     sz = my_sfunc(network, community)
 
     Input
+
       network - Networkx Graph class instance.
  
       community - List of the IDs of nodes belonging to a community.
@@ -156,7 +161,7 @@ How to pass my size function to qstest
 
     sg, pvals = qstest(network, communities, qfunc, my_sfunc, cdalgorithm)
 
-  Example
+  Example (examples/example3.py)
 
     import networkx as nx
     import qstest as qs
@@ -189,7 +194,7 @@ How to pass my community detection algorithm to qstest
     
   If the community-detection algorithm requires parameters such as the number of communities, then pass the parameters through global variables, e.g., define a global variable C, then access to C from the cdalgorithm.
   
-  Example
+  Example (examples/example4.py)
 
     import networkx as nx
     import qstest as qs
