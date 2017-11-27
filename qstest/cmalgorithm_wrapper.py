@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 import community as com
-from networkx.algorithms import nxcom
+from networkx.algorithms import community as nxcom
 
 
 # Wrapper function of the Louvain algorithm implemented in Networkx

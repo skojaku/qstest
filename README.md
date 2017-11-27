@@ -1,9 +1,9 @@
 # qstest
-Python codes for the (q,s)-test, a generalised significance test for individual communities in networks. 
+Python codes for the (q, s)-test, a generalised significance test for individual communities in networks. 
 
 Please cite:
 
-    Kojaku, S. and Masuda, N. "A generalised significance test for individual communities in networks". Preprint arXiv:???? (2017).
+    Kojaku, S. and Masuda, N. "A generalised significance test for individual communities in networks". Preprint arXiv:???? (2017)
 
 # Installation
   You can install this python package with pip, a package management system for the software written in Python.
@@ -179,10 +179,10 @@ communities = my_cdalgorithm(network)
 sg, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, my_cdalgorithm)
 ```
 
-## REQUIREMENT: 
+## REQUIREMENT
 * Python 2.7 or later
 * Networkx 2.0 or later
 --- 
-Last updated: 25 December 2017
+Last updated: 28 November 2017
 
 
