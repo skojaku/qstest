@@ -16,7 +16,11 @@ Contents
  
   requirements.txt - Script for pip (a package manager for Python)
 
-  test.py - Test code for pip
+  test.py - Test code for Travis CI
+
+  .gitignore - Configuration file for GitHub
+  
+  .travis.yml - Configuration file for Travis CI
   
   qstest/ - Python codes of the (q, s)-test:
       
