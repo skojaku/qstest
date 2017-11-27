@@ -45,7 +45,7 @@ Please cite:
     
     You can use your definition of the size of a community. See ["How to pass my size function to qstest"](#how-to-pass-my-size-function-to-qstest).
    
- * `cdalgorithm` - Name of the function providing communities in the network. Following algorithms are available:
+ * `cdalgorithm` - Community detection algorithm. Following algorithms are available:
     * louvain_algorithm - [Louvain algorithm](http://perso.crans.org/aynaud/communities/index.html),
     * label_propagation - [Label propagation algorithm](https://networkx.github.io/documentation/stable/reference/algorithms/generated/networkx.algorithms.community.asyn_lpa.asyn_lpa_communities.html#networkx.algorithms.community.asyn_lpa.asyn_lpa_communities).
 
