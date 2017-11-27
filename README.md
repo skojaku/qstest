@@ -20,8 +20,8 @@ Please cite:
  
 #### Input 
 * `network` - Networkx Graph class instance.
-* `communities` - C-dimensional list. communities[c] is a list containing the ids of the nodes in community c.
-* `qfunc` - Quality function of individual communities. Following quality functions are available:
+* `communities` - C-dimensional list of lists. communities[c] is a list containing the ids of the nodes in community c.
+* `qfunc` - Name of the quality function of individual communities. Following quality functions are available:
     * qs.qmod - Modularity-based quality function of individual communities, 
     * qs.qint - Internal average degree, 
     * qs.qexp - Expansion,　　
@@ -29,13 +29,13 @@ Please cite:
 
   You can use your quality function of individual communities. See ["How to provide my quality function to qstest"](#how-to-provide-my-quality-function-to-qstest).
 
- * `sfunc`  - Size function of individual communities. Following quality functions are available:
+ * `sfunc`  - Name of the function providing the size of individual communities. Following quality functions are available:
     * qs.n - Number of nodes in a community, 
     * qs.vol - Sum of degrees of nodes in a community.
     
     You can use your measure of the size of a community. See ["How to provide my measure of community size to qstest"](#how-to-provide-my-measure-of-community-size-to-qstest).
    
- * `cdalgorithm` - Algorithm for finding communities. Following algorithms are available:
+ * `cdalgorithm` - Name of the function providing communities in the network. Following algorithms are available:
     * qs.louvain_algorithm - [Louvain algorithm](http://perso.crans.org/aynaud/communities/index.html),
     * qs.label_propagation - [Label propagation algorithm](https://networkx.github.io/documentation/stable/reference/algorithms/generated/networkx.algorithms.community.asyn_lpa.asyn_lpa_communities.html#networkx.algorithms.community.asyn_lpa.asyn_lpa_communities).
 
@@ -43,7 +43,7 @@ Please cite:
  
  * `num_of_rand_net` (optional)  - Number of randomised networks. (Default: 500)
  * `alpha` (optional)  - Statistical significance level before the Šidák correction. (Default: 0.05)
- * `num_of_thread` (optional) - Number of threads allowed. (Default: 2)
+ * `num_of_thread` (optional) - Maximum number of threads running in a CPU. (Default: 4)
   
 #### Output
  * `s` - C-dimensional list. s[c] = True if community c is significant, and s[c] = False if it is insignificant. 

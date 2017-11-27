@@ -28,7 +28,7 @@ import multiprocessing as mp
 #
 #   alpha (optional) - Statistical significance level before the Šidák correction. (Default: 0.05)
 #
-#   num_of_thread (optional) - Maximum number of threads running in a CPU. (Default: 4)
+#   num_of_thread (optional) - Maximum number of threads running in a CPU. (Default: 2)
 #
 #
 # Output:
@@ -36,7 +36,7 @@ import multiprocessing as mp
 #   q - Quality of the community
 #
 #
-def qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net = 500, num_of_thread = 4, alpha = 0.05):
+def qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net = 500, num_of_thread = 2, alpha = 0.05):
 
 	q = np.array( [ qfunc(network, x) for x in communities], dtype=np.float );	
 	s = np.array( [ sfunc(network, x) for x in communities], dtype=np.float );
@@ -84,6 +84,7 @@ def qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net = 50
 
 # Private function for qstest		
 def draw_qs_samples(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net):
+	
 	deg = [x[1] for x in network.degree()];
 	q_rand = [];
 	s_rand = [];
@@ -99,4 +100,3 @@ def draw_qs_samples(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand
 # Private function for qstest		
 def wrapper_draw_qs_samples(args):
     return draw_qs_samples(*args)	
-			
