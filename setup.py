@@ -53,5 +53,5 @@ setup(
 
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
 
-    install_requires=['networkx', 'scipy', 'python-louvain', 'numpy', 'decorator'],
+    install_requires=['networkx>=2.0', 'scipy>=1.0', 'python-louvain==0.9', 'numpy', 'decorator'],
 )
