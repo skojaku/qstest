@@ -8,7 +8,7 @@ from networkx.algorithms import community as nxcom
 # 
 # Usage
 #
-#   communities = louvain_algorithm(network)
+#   communities = louvain(network)
 #
 # Input
 #
@@ -18,7 +18,7 @@ from networkx.algorithms import community as nxcom
 #
 #   communities - List of lists. communities[c] is the list containing the IDs of nodes belonging to community c. 
 #
-def louvain_algorithm(network):
+def louvain(network):
     coms = com.best_partition(network)
 
     nodes = network.nodes()
@@ -38,7 +38,7 @@ def louvain_algorithm(network):
 #
 # Usage
 #
-#   communities = label_propagation_algorithm(network)
+#   communities = label_propagation(network)
 #
 # Input
 #
@@ -48,7 +48,7 @@ def louvain_algorithm(network):
 #
 #   communities - List of lists. communities[c] is the list containing the IDs of nodes belonging to community c. 
 #
-def label_propagation_algorithm(network):
+def label_propagation(network):
     coms_iter = nxcom.asyn_lpa_communities(network)
     communities = []
     for nodes in iter(coms_iter):

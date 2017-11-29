@@ -6,5 +6,5 @@ def my_sfunc(network, nodes):
         return len(nodes) * len(nodes)
 
 network = nx.karate_club_graph()
-communities = qs.louvain_algorithm(network)
-sg, pvals = qs.qstest(network, communities, qs.qmod, my_sfunc, qs.louvain_algorithm)
+communities = qs.louvain(network)
+sg, pvals = qs.qstest(network, communities, qs.qmod, my_sfunc, qs.louvain)
