@@ -20,23 +20,13 @@ def find_version(*file_paths):
 
 setup(
     name='qstest',
-
     version='1.0.3',
-
     description='Python code for the (q,s)-test',
     long_description=long_description,
-
-    # The project's main homepage.
     url='https://github.com/skojaku/qstest.git',
-
-    # Author details
     author='Sadamori Kojaku',
     author_email='sadamori.koujaku@bristol.ac.uk',
-
-    # Choose your license
     license='MIT',
-
-    # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Science/Research',
@@ -47,11 +37,7 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
     ],
-
-    # What does your project relate to?
     keywords='network community significance test',
-
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
-
     install_requires=['networkx>=2.0', 'scipy>=1.0', 'python-louvain==0.9', 'numpy', 'decorator'],
 )

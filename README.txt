@@ -12,9 +12,9 @@ Contents
 
   README.txt - This README file
 
-  setup.py - Script for installing qstest 
+  setup.py - Script for installing qstest
  
-  requirements.txt - Script for installing qstest
+  requirements.txt - List of libraries installed by setup.py 
 
   test.py - Test code for Travis CI
 
@@ -26,7 +26,7 @@ Contents
       
     qstest/__init__.py - Header file
   
-    qstest/cmalgorithm_wrapper.py - Codes for community-detection algorithms
+    qstest/cdalgorithm_wrapper.py - Codes for community-detection algorithms
 
     qstest/qstest.py contains - Codes for the (q, s)-test 
 
@@ -36,7 +36,7 @@ Contents
   
   examples/ - example codes:
     
-    examples/example1.py - Usage of qstest with a built-in quality function, community-size function, and community detection algorithm
+    examples/example1.py - Usage of qstest with a built-in quality function, community-size function and community detection algorithm
 
     examples/example2.py - Usage of qstest with a user-defined quality function
 
