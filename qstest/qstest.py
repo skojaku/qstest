@@ -16,7 +16,7 @@ import multiprocessing as mp
 #  
 #    communities - C-dimensional list of lists. communities[c] is a list containing the IDs of nodes belonging to community c. Node and community indices start from 0.
 #  
-#    qfunc - Quality of individual communities. The following quality functions are available:
+#    qfunc - Quality of a community. The following quality functions are available:
 #  
 #      qmod - Contribution of a community to the modularity 
 #  
@@ -32,7 +32,7 @@ import multiprocessing as mp
 #  
 #      n - Number of nodes in a community
 #   
-#      vol - Sum of degrees of nodes in a community
+#      vol - Sum of the degrees of nodes in a community
 #      
 #      To pass your community-size function to qstest, see "How to pass your community-size function to qstest" in README.txt.
 #     
@@ -52,9 +52,9 @@ import multiprocessing as mp
 #  
 #  Output
 #
-#    sg - Results of the significance test (C-dimensional list). sg[c] = True of False indicates that community c is significant or insignificant, respectively. 
+#    sg - Results of the significance test (C-dimensional list). sg[c] = True or False indicates that community c is significant or insignificant, respectively. 
 #  
-#    p_values - P-value for the communities (C-dimensional list). p_values[c] is the p-value for community c.
+#    p_values - P-values for the communities (C-dimensional list). p_values[c] is the p-value for community c.
 # 
 def qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net = 500, num_of_thread = 4, alpha = 0.05):
     q = np.array([qfunc(network, x) for x in communities], dtype = np.float)    
@@ -64,9 +64,9 @@ def qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net = 50
     
     q_tilde = []
     s_tilde = []
-    if num_of_thread == 1: # single thread
+    if num_of_thread == 1:
         q_tilde, s_tilde = draw_qs_samples(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net)
-    else: # multithreads
+    else:
         private_args = [(network, communities, qfunc, sfunc, cdalgorithm, int(num_of_rand_net / num_of_thread) + 1) for i in range(num_of_thread)]
         pool = mp.Pool(num_of_thread)
         qs_tilde = pool.map(wrapper_draw_qs_samples, private_args)

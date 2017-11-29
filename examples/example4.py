@@ -2,7 +2,7 @@ import networkx as nx
 import qstest as qs
 from networkx.algorithms import community as nxcdalgorithm
 
-# Wrapper function of async_fluidc implemented in Networkx 2.0
+# Wrapper function for async_fluidc implemented in Networkx 2.0
 def my_cdalgorithm(network):
         communities = []
         subnets = nx.connected_component_subgraphs(network)

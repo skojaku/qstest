@@ -23,7 +23,7 @@ def n(network, community):
     return s 
 
 
-# Sum of degrees of nodes in a community   
+# Sum of the degrees of nodes in a community   
 #
 # Usage
 #
@@ -37,7 +37,7 @@ def n(network, community):
 #
 # Output
 #
-#   s - Sum of degrees of nodes in a community
+#   s - Sum of the degrees of nodes in a community
 #
 def vol(network, community):
     s = sum([x[1] for x in network.degree(community)])

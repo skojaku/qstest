@@ -6,7 +6,7 @@ Please cite
 ———————————————————————————————————————————————————————————————————————————
 Contents
   
-  LICENSE - Licence of qstest
+  LICENSE - License of qstest
   
   README.md - README file for Github	
 
@@ -26,13 +26,13 @@ Contents
       
     qstest/__init__.py - Header file
   
-    qstest/cmalgorithm_wrapper.py - Codes of community-detection algorithms
+    qstest/cmalgorithm_wrapper.py - Codes for community-detection algorithms
 
     qstest/qstest.py contains - Codes for the (q, s)-test 
 
-    qstest/quality_functions.py - Codes for calculating quality functions of individual communities
+    qstest/quality_functions.py - Codes for calculating quality functions of a community 
   
-    qstest/size_functions.py - Codes for calculating community-size functions of individual communities (i.e., the size of individual communities)
+    qstest/size_functions.py - Codes for calculating the size of a community
   
   examples/ - example codes:
     
@@ -52,7 +52,7 @@ Installation
 
     pip install qstest
 
-  If it does not work, try 
+  If this does not work, try 
 	
     python setup.py install
 ———————————————————————————————————————————————————————————————————————————
@@ -66,7 +66,7 @@ Usage
   
     communities - C-dimensional list of lists. communities[c] is a list containing the IDs of nodes belonging to community c. Node and community indices start from 0.
   
-    qfunc - Quality of individual communities. The following quality functions are available:
+    qfunc - Quality of a community. The following quality functions are available:
   
       qmod - Contribution of a community to the modularity 
   
@@ -76,15 +76,15 @@ Usage
   　
       qcnd - Conductance　
   
-      To pass your quality function to qstest, see "How to pass your quality function to qstest".
+      To pass your quality function to qstest, see "How to pass your quality function to qstest" below.
   
-    sfunc - Community-size function (i.e., size of individual communities). The following community-size functions are available:
+    sfunc - Community-size function (i.e., size of a community). The following community-size functions are available:
   
       n - Number of nodes in a community
    
-      vol - Sum of degrees of nodes in a community
+      vol - Sum of the degrees of nodes in a community
       
-      To pass your community-size function to qstest, see "How to pass your community-size function to qstest".
+      To pass your community-size function to qstest, see "How to pass your community-size function to qstest" below.
      
     cdalgorithm - Community-detection algorithm. The following algorithms are available:
   
@@ -92,7 +92,7 @@ Usage
   
       label_propagation - Label propagation algorithm (https://networkx.github.io/documentation/stable/reference/algorithms/community.html)
   
-      To pass your community-detection algorithm to qstest, see "How to pass your community-detection algorithm to qstest".
+      To pass your community-detection algorithm to qstest, see "How to pass your community-detection algorithm to qstest" below.
    
     num_of_rand_net (optional) - Number of randomised networks (Default: 500)
   
@@ -102,9 +102,9 @@ Usage
   
   Output
 
-    sg - Results of the significance test (C-dimensional list). sg[c] = True of False indicates that community c is significant or insignificant, respectively. 
+    sg - Results of the significance test (C-dimensional list). sg[c] = True or False indicates that community c is significant or insignificant, respectively. 
   
-    p_values - P-value for the communities (C-dimensional list). p_values[c] is the p-value for community c. 
+    p_values - P-values for the communities (C-dimensional list). p_values[c] is the p-value for community c. 
   
   Example (examples/example1.py)
   
@@ -152,17 +152,17 @@ How to pass your community-size function to qstest
     
   Write a community-size function of a community as follows:
   
-    sz = my_sfunc(network, community)
+    s = my_sfunc(network, community)
 
     Input
 
       network - Networkx Graph class instance
  
-      community - List of the IDs of nodes belonging to a community.
+      community - List of the IDs of nodes belonging to a community
 
     Output
 
-      sz - Size of the community
+      s - Size of the community
 
   Then, pass my_sfunc to qstest:
 
@@ -183,7 +183,7 @@ How to pass your community-size function to qstest
 ———————————————————————————————————————————————————————————————————————————
 How to pass your community-detection algorithm to qstest
 
-  To pass your community-detection algorithm to qstest, write the following wrapper function:
+  To pass your community-detection algorithm to qstest, write a wrapper function of the following form:
    
     communities = my_cdalgorithm(network)
 
@@ -195,11 +195,11 @@ How to pass your community-detection algorithm to qstest
 
       communities - C-dimensional list of lists. communities[c] is a list containing the IDs of nodes belonging to community c.
     
-  Then, provide my_cdalgorithm to qstest:
+  Then, pass my_cdalgorithm to qstest:
 
     sg, p_values = qstest(network, communities, qfunc, sfunc, my_cdalgorithm)
     
-  If the community-detection algorithm requires parameters such as the number of communities, then pass the parameters as global variables, e.g., define a global variable X, then access to X from the cdalgorithm.
+  If the community-detection algorithm requires parameters such as the number of communities, then pass the parameters as global variables, e.g., define a global variable X, then use X within the cdalgorithm.
   
   Example (examples/example4.py)
 
@@ -207,7 +207,7 @@ How to pass your community-detection algorithm to qstest
     import qstest as qs
     from networkx.algorithms import community as nxcdalgorithm
     
-    # Wrapper function of async_fluidc implemented in Networkx 2.0
+    # Wrapper function for async_fluidc implemented in Networkx 2.0
     def my_cdalgorithm(network):
             communities = []
             subnets = nx.connected_component_subgraphs(network)
@@ -235,4 +235,4 @@ Requirements
 
   python-louvain 0.9
 ———————————————————————————————————————————————————————————————————————————
-Last updated: 27 November 2017
+Last updated: 29 November 2017
