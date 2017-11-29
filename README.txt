@@ -58,13 +58,13 @@ Installation
 ———————————————————————————————————————————————————————————————————————————
 Usage
  
-  sg, pvals = qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net = 500, alpha = 0.05, num_of_thread = 4)
+  sg, p_values = qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net = 500, alpha = 0.05, num_of_thread = 4)
  
   Input 
 
     network - Networkx Graph class instance
   
-    communities - C-dimensional list of lists. communities[c] is a list containing the IDs of nodes belonging to community c. Node and communiy indices start from 0.
+    communities - C-dimensional list of lists. communities[c] is a list containing the IDs of nodes belonging to community c. Node and community indices start from 0.
   
     qfunc - Quality of individual communities. The following quality functions are available:
   
@@ -78,15 +78,15 @@ Usage
   
       To pass your quality function to qstest, see "How to pass your quality function to qstest".
   
-    sfunc - Size function (i.e., size of individual communities). The following size functions are available:
+    sfunc - Community-size function (i.e., size of individual communities). The following community-size functions are available:
   
       n - Number of nodes in a community
    
       vol - Sum of degrees of nodes in a community
       
-      To pass your size function to qstest, see "How to pass your community-size function to qstest".
+      To pass your community-size function to qstest, see "How to pass your community-size function to qstest".
      
-    cdalgorithm - Community-detection algorithm. The following algorithms (implemented in Networkx) are available:
+    cdalgorithm - Community-detection algorithm. The following algorithms are available:
   
       louvain - Louvain algorithm (http://perso.crans.org/aynaud/communities/index.html)
   
@@ -104,7 +104,7 @@ Usage
 
     sg - Results of the significance test (C-dimensional list). sg[c] = True of False indicates that community c is significant or insignificant, respectively. 
   
-    pvals - P-value for the communities (C-dimensional list). pvals[c] is the p-value for community c. 
+    p_values - P-value for the communities (C-dimensional list). p_values[c] is the p-value for community c. 
   
   Example (examples/example1.py)
   
@@ -113,7 +113,7 @@ Usage
     
     network = nx.karate_club_graph()
     communities = qs.louvain(network)
-    sg, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, qs.louvain)
+    sg, p_values = qs.qstest(network, communities, qs.qmod, qs.vol, qs.louvain)
 ———————————————————————————————————————————————————————————————————————————
 How to pass your quality function to qstest
 
@@ -133,7 +133,7 @@ How to pass your quality function to qstest
 
   Then, pass my_qfunc to qstest:
 
-    sg, pvals = qstest(network, communities, my_qfunc, sfunc, cdalgorithm)
+    sg, p_values = qstest(network, communities, my_qfunc, sfunc, cdalgorithm)
 
   Example (examples/example2.py)
 
@@ -146,7 +146,7 @@ How to pass your quality function to qstest
     
     network = nx.karate_club_graph()
     communities = qs.louvain(network)
-    sg, pvals = qs.qstest(network, communities, my_qfunc, qs.vol, qs.louvain)
+    sg, p_values = qs.qstest(network, communities, my_qfunc, qs.vol, qs.louvain)
 ———————————————————————————————————————————————————————————————————————————
 How to pass your community-size function to qstest
     
@@ -158,7 +158,7 @@ How to pass your community-size function to qstest
 
       network - Networkx Graph class instance
  
-      community - List of the IDs of nodes belonging to a community
+      community - List of the IDs of nodes belonging to a community.
 
     Output
 
@@ -166,7 +166,7 @@ How to pass your community-size function to qstest
 
   Then, pass my_sfunc to qstest:
 
-    sg, pvals = qstest(network, communities, qfunc, my_sfunc, cdalgorithm)
+    sg, p_values = qstest(network, communities, qfunc, my_sfunc, cdalgorithm)
 
   Example (examples/example3.py)
 
@@ -179,7 +179,7 @@ How to pass your community-size function to qstest
     
     network = nx.karate_club_graph()
     communities = qs.louvain(network)
-    sg, pvals = qs.qstest(network, communities, qs.qmod, my_sfunc, qs.louvain)
+    sg, p_values = qs.qstest(network, communities, qs.qmod, my_sfunc, qs.louvain)
 ———————————————————————————————————————————————————————————————————————————
 How to pass your community-detection algorithm to qstest
 
@@ -193,11 +193,11 @@ How to pass your community-detection algorithm to qstest
     
     Output
 
-      communities - C-dimensional list of lists. communities[c] is a list containing the IDs of nodes belonging to community c
+      communities - C-dimensional list of lists. communities[c] is a list containing the IDs of nodes belonging to community c.
     
-  Then, provide the implemented my_cdalgorithm to qstest:
+  Then, provide my_cdalgorithm to qstest:
 
-    sg, pvals = qstest(network, communities, qfunc, sfunc, my_cdalgorithm)
+    sg, p_values = qstest(network, communities, qfunc, sfunc, my_cdalgorithm)
     
   If the community-detection algorithm requires parameters such as the number of communities, then pass the parameters as global variables, e.g., define a global variable X, then access to X from the cdalgorithm.
   
@@ -223,7 +223,7 @@ How to pass your community-detection algorithm to qstest
     
     network = nx.karate_club_graph()
     communities = my_cdalgorithm(network)
-    sg, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, my_cdalgorithm)
+    sg, p_values = qs.qstest(network, communities, qs.qmod, qs.vol, my_cdalgorithm)
 ———————————————————————————————————————————————————————————————————————————
 Requirements
 

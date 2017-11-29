@@ -18,4 +18,4 @@ maxiter = 10
 
 network = nx.karate_club_graph()
 communities = my_cdalgorithm(network)
-sg, pvals = qs.qstest(network, communities, qs.qmod, qs.vol, my_cdalgorithm)
+sg, p_values = qs.qstest(network, communities, qs.qmod, qs.vol, my_cdalgorithm)

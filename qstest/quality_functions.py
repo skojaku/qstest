@@ -10,13 +10,13 @@ import numpy as np
 #
 # Input
 #
-#   network - Networkx Graph class instance.
+#   network - Networkx Graph class instance
 #
-#   community - List of the IDs of nodes in a community.
+#   community - List of the IDs of nodes in a community
 #
 # Output
 #
-#   q - Quality of the community.
+#   q - Quality of the community
 #
 def qmod(network, community):
     deg = network.degree(community)
@@ -42,11 +42,12 @@ def qmod(network, community):
 #
 # Input
 #
-#   network - Networkx Graph class instance.
+#   network - Networkx Graph class instance
 #
-#   community - List of the IDs of nodes in a community.
+#   community - List of the IDs of nodes in a community
 #
 # Output
+#
 #   q - Quality of the community
 #
 def qint(network, community):
@@ -72,13 +73,13 @@ def qint(network, community):
 #
 # Input
 #
-#   network - Networkx Graph class instance.
+#   network - Networkx Graph class instance
 #
-#   community - List of the IDs of nodes in a community.
+#   community - List of the IDs of nodes in a community
 #
 # Output
 #
-#   q - Quality of the community.
+#   q - Quality of the community
 #
 def qext(network, community):
     deg = network.degree(community)
@@ -93,7 +94,7 @@ def qext(network, community):
         n += 1
         D += deg[i]
 
-    q = -(D - q) / n
+    q = - (D - q) / n
     return q
 
 
@@ -105,13 +106,13 @@ def qext(network, community):
 #
 # Input
 #
-#   network - Networkx Graph class instance.
+#   network - Networkx Graph class instance
 #
-#   community - List of the IDs of nodes in a community.
+#   community - List of the IDs of nodes in a community
 #
 # Output
 #
-#   q - Quality of the community.
+#   q - Quality of the community
 #
 def qcnd(network, community):
     deg = network.degree(community)
@@ -126,5 +127,5 @@ def qcnd(network, community):
         n += 1
         D += deg[i]
 
-    q = -(D - q) / D
+    q = - (D - q) / D
     return q

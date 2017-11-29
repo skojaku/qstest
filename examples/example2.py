@@ -7,4 +7,4 @@ def my_qfunc(network, nodes):
 
 network = nx.karate_club_graph()
 communities = qs.louvain(network)
-sg, pvals = qs.qstest(network, communities, my_qfunc, qs.vol, qs.louvain)
+sg, p_values = qs.qstest(network, communities, my_qfunc, qs.vol, qs.louvain)

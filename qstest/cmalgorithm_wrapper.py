@@ -4,7 +4,7 @@ import community as com
 from networkx.algorithms import community as nxcom
 
 
-# Wrapper function of the Louvain algorithm implemented in Networkx
+# Wrapper function of the build-in Louvain algorithm of Networkx
 # 
 # Usage
 #
@@ -16,7 +16,7 @@ from networkx.algorithms import community as nxcom
 #
 # Output
 #
-#   communities - List of lists. communities[c] is the list containing the IDs of nodes belonging to community c. 
+#   communities - C-dimensional list of lists. communities[c] is a list containing the IDs of nodes belonging to community c. Node and communiy indices start from 0.
 #
 def louvain(network):
     coms = com.best_partition(network)
@@ -34,7 +34,7 @@ def louvain(network):
     return communities
 
 
-# Wrapper function of the label propgation algorithm implemented in Networkx
+# Wrapper function of the built-in label propgation algorithm of Networkx
 #
 # Usage
 #
@@ -46,7 +46,7 @@ def louvain(network):
 #
 # Output
 #
-#   communities - List of lists. communities[c] is the list containing the IDs of nodes belonging to community c. 
+#   communities - C-dimensional list of lists. communities[c] is a list containing the IDs of nodes belonging to community c. Node and communiy indices start from 0.
 #
 def label_propagation(network):
     coms_iter = nxcom.asyn_lpa_communities(network)
