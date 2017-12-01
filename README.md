@@ -7,35 +7,26 @@ Please cite
 
 # Contents
   
-* LICENSE - License of qstest
-* README.md - README file for Github	
-* README.txt - This README file
-* setup.py - Script for installing qstest
-* requirements.txt - List of libraries installed by setup.py 
-* test.py - Test code for Travis CI
-* .gitignore - Configuration file for GitHub
-* .travis.yml - Configuration file for Travis CI
-* qstest/ - Python codes for the (q, s)-test:
-      
-    qstest/__init__.py - Header file
+ * LICENSE - License of qstest
+ * README.md - README file for Github	
+ * README.txt - This README file
+ * setup.py - Script for installing qstest
+ * requirements.txt - List of libraries installed by setup.py 
+ * test.py - Test code for Travis CI
+ * .gitignore - Configuration file for GitHub
+ * .travis.yml - Configuration file for Travis CI
+ * qstest/ - Python codes for the (q, s)-test:
+    * qstest/__init__.py - Header file
+    * qstest/cdalgorithm_wrapper.py - Codes for community-detection algorithms
+    * qstest/qstest.py contains - Codes for the (q, s)-test 
+    * qstest/quality_functions.py - Codes for calculating quality functions of a community 
+    * qstest/size_functions.py - Codes for calculating the size of a community
   
-    qstest/cdalgorithm_wrapper.py - Codes for community-detection algorithms
-
-    qstest/qstest.py contains - Codes for the (q, s)-test 
-
-    qstest/quality_functions.py - Codes for calculating quality functions of a community 
-  
-    qstest/size_functions.py - Codes for calculating the size of a community
-  
-  examples/ - example codes:
-    
-    examples/example1.py - Usage of qstest with a built-in quality function, community-size function and community detection algorithm
-
-    examples/example2.py - Usage of qstest with a user-defined quality function
-
-    examples/example3.py - Usage of qstest with a user-defined community-size function 
-
-    examples/example4.py - Usage of qstest with a user-defined community-detection algorithm
+ * examples/ - example codes:
+    * examples/example1.py - Usage of qstest with a built-in quality function, community-size function and community detection algorithm
+    * examples/example2.py - Usage of qstest with a user-defined quality function
+    * examples/example3.py - Usage of qstest with a user-defined community-size function 
+    * examples/example4.py - Usage of qstest with a user-defined community-detection algorithm
 
 # Installation
 
