@@ -1,4 +1,6 @@
 # qstest
+[![Build Status](https://travis-ci.org/skojaku/qstest.svg?branch=master)](https://travis-ci.org/skojaku/qstest)
+
 Python codes for the (q, s)-test, a significance test for individual communities in networks. 
 
 Please cite
