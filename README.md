@@ -7,23 +7,15 @@ Please cite
 
 # Contents
   
-  LICENSE - License of qstest
-  
-  README.md - README file for Github	
-
-  README.txt - This README file
-
-  setup.py - Script for installing qstest
- 
-  requirements.txt - List of libraries installed by setup.py 
-
-  test.py - Test code for Travis CI
-
-  .gitignore - Configuration file for GitHub
-  
-  .travis.yml - Configuration file for Travis CI
-  
-  qstest/ - Python codes for the (q, s)-test:
+* LICENSE - License of qstest
+* README.md - README file for Github	
+* README.txt - This README file
+* setup.py - Script for installing qstest
+* requirements.txt - List of libraries installed by setup.py 
+* test.py - Test code for Travis CI
+* .gitignore - Configuration file for GitHub
+* .travis.yml - Configuration file for Travis CI
+* qstest/ - Python codes for the (q, s)-test:
       
     qstest/__init__.py - Header file
   
