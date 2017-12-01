@@ -16,7 +16,7 @@ Please cite
  * .gitignore - Configuration file for GitHub
  * .travis.yml - Configuration file for Travis CI
  * qstest/ - Python codes for the (q, s)-test:
-    * qstest/__init__.py - Header file
+    * qstest/\__init__.py - Header file
     * qstest/cdalgorithm_wrapper.py - Codes for community-detection algorithms
     * qstest/qstest.py contains - Codes for the (q, s)-test 
     * qstest/quality_functions.py - Codes for calculating quality functions of a community 
@@ -52,43 +52,25 @@ Please cite
  
 #### Input 
 
-    `network` - Networkx Graph class instance
-  
-    `communities` - C-dimensional list of lists. communities[c] is a list containing the IDs of nodes belonging to community c. Node and community indices start from 0.
-  
-    `qfunc` - Quality of a community. The following quality functions are available:
-  
-      qmod - Contribution of a community to the modularity 
-  
-      qint - Internal average degree 
-  
-      qexp - Expansion　
-  　
-      qcnd - Conductance　
-  
-      To pass your quality function to qstest, see "How to pass your quality function to qstest" below.
-  
-    `sfunc` - Community-size function (i.e., size of a community). The following community-size functions are available:
-  
-      n - Number of nodes in a community
-   
-      vol - Sum of the degrees of nodes in a community
-      
-      To pass your community-size function to qstest, see "How to pass your community-size function to qstest" below.
-     
-    `cdalgorithm` - Community-detection algorithm. The following algorithms are available:
-  
-      louvain - Louvain algorithm (http://perso.crans.org/aynaud/communities/index.html)
-  
-      label_propagation - Label propagation algorithm (https://networkx.github.io/documentation/stable/reference/algorithms/community.html)
-  
-      To pass your community-detection algorithm to qstest, see "How to pass your community-detection algorithm to qstest" below.
-   
-    `num_of_rand_net` (optional) - Number of randomised networks (Default: 500)
-  
-    `alpha` (optional) - Statistical significance level before the Šidák correction (Default: 0.05)
-  
-    `num_of_thread` (optional) - Maximum number of CPU threads (Default: 4)
+ * `network` - Networkx Graph class instance
+ * `communities` - C-dimensional list of lists. communities[c] is a list containing the IDs of nodes belonging to community c. Node and community indices start from 0.
+ * `qfunc` - Quality of a community. The following quality functions are available:
+   * qmod - Contribution of a community to the modularity 
+   * qint - Internal average degree 
+   * qexp - Expansion　
+   * qcnd - Conductance　
+   To pass your quality function to qstest, see "How to pass your quality function to qstest" below.
+ * `sfunc` - Community-size function (i.e., size of a community). The following community-size functions are available:
+   * n - Number of nodes in a community
+   * vol - Sum of the degrees of nodes in a community
+   To pass your community-size function to qstest, see "How to pass your community-size function to qstest" below.
+ * `cdalgorithm` - Community-detection algorithm. The following algorithms are available:
+   * louvain - Louvain algorithm (http://perso.crans.org/aynaud/communities/index.html)
+   * label_propagation - Label propagation algorithm (https://networkx.github.io/documentation/stable/reference/algorithms/community.html)
+   To pass your community-detection algorithm to qstest, see "How to pass your community-detection algorithm to qstest" below.
+ * `num_of_rand_net` (optional) - Number of randomised networks (Default: 500)
+ * `alpha` (optional) - Statistical significance level before the Šidák correction (Default: 0.05)
+ * `num_of_thread` (optional) - Maximum number of CPU threads (Default: 4)
   
 #### Output 
 
