@@ -5,7 +5,7 @@ from os import path
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+with open(path.join(here, 'README.txt'), encoding='utf-8') as f:
     long_description = f.read()
 
 
@@ -20,7 +20,7 @@ def find_version(*file_paths):
 
 setup(
     name='qstest',
-    version='1.0.3',
+    version='1.0.4',
     description='Python code for the (q,s)-test',
     long_description=long_description,
     url='https://github.com/skojaku/qstest.git',
