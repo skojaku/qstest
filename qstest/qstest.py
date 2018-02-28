@@ -98,7 +98,7 @@ def qstest(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand_net = 50
         p_values[cid] = 1.0 - (sum( w * cd ) / denom)
         significant[cid] = p_values[cid] <= alpha_corrected
 
-    return significant, p_values    
+    return significant, p_values, q_tilde, s_tilde 
 
 
 # Private function for qstest        
