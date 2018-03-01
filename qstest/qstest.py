@@ -107,8 +107,7 @@ def draw_qs_samples(network, communities, qfunc, sfunc, cdalgorithm, num_of_rand
     q_rand = []
     s_rand = []
     for i in range(num_of_rand_net):
-        #networkr = nx.configuration_model(deg)
-	networkr = nx.expected_degree_graph(deg)
+        networkr = nx.configuration_model(deg)
         communities_rand = cdalgorithm(networkr)
         q_rand = q_rand + [qfunc(networkr, x) for x in communities_rand]    
         s_rand = s_rand + [sfunc(networkr, x) for x in communities_rand]
