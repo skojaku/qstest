@@ -20,7 +20,7 @@ def find_version(*file_paths):
 
 setup(
     name='qstest',
-    version='1.0.4',
+    version='1.0.3',
     description='Python code for the (q,s)-test',
     long_description=long_description,
     url='https://github.com/skojaku/qstest.git',
