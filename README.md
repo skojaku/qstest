@@ -5,7 +5,7 @@ Python codes for the (q, s)-test, a significance test for individual communities
 
 Please cite
 
-    Kojaku, S. and Masuda, N. "A generalised significance test for individual communities in networks". Preprint arXiv: 1712.00298 (2017)
+    Kojaku, S. and Masuda, N. "A generalised significance test for individual communities in networks". Sci. Rep. 8, 7351 (2018)
 
 # Contents
   
