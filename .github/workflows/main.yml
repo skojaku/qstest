@@ -20,12 +20,10 @@ jobs:
           python -m pip install --upgrade pip wheel setuptools
           pip install -r requirements.txt
       - name: Unit Test
-        working-directory: ./libs/residual2vec
         run: |
           pip install networkx
           python -m unittest tests/test.py
       - name: Build python package
-        working-directory: libs/residual2vec
         run: |
             python setup.py bdist_wheel 
       - name: Deploy to PyPI
@@ -34,4 +32,3 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
-          packages_dir: libs/residual2vec/dist
