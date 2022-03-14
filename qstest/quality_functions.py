@@ -81,7 +81,7 @@ def qint(network, community):
 #
 #   q - Quality of the community
 #
-def qext(network, community):
+def qexp(network, community):
     deg = network.degree(community)
     q = 0
     n = 0
